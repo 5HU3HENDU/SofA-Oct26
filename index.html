@@ -37,6 +37,10 @@ dialog{border:2px solid var(--ink);border-radius:7px 13px 9px 5px;background:var
 .journey-countdown{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 0 24px;border-top:1px dashed #31584788;border-bottom:1px dashed #31584788;padding:13px 2px;color:#315847}.journey-countdown span{font-family:Kalam,cursive;font-size:20px}.journey-countdown small{font-size:10px;text-align:right}
 
 .platform{background:transparent;border:0;padding:0;margin:0 0 22px;max-width:660px;overflow:hidden;border-radius:0}.station-canopy{height:8px;display:flex;gap:3px;transform:rotate(-.3deg)}.station-canopy i{height:6px;flex:1;background:#315847;opacity:.7}.station-environment{height:72px;margin-top:0}.station-environment svg{display:block;width:100%;height:80px}.safety-line{height:6px;background:repeating-linear-gradient(90deg,#d7b553 0 9px,#dfbd5b 9px 13px);margin-top:0;transform:rotate(.2deg)}.station-tracks{height:22px;border-top:2px solid #69685e;border-bottom:2px solid #69685e;margin-top:7px;background:repeating-linear-gradient(90deg,transparent 0 18px,#69685e55 18px 22px,transparent 22px 38px);opacity:.55}.journey-ticket{margin-top:0}
+
+.topic-environment{max-width:660px;height:108px;margin:-6px 0 20px;overflow:hidden}.topic-environment svg{width:100%;height:100%;display:block}.community-page .subtopic-grid{max-width:660px}.notice-wall{display:grid;grid-template-columns:1fr;gap:18px;padding:8px 0 0}.notice-wall .subtopic{position:relative;display:block;background:var(--note-color);border:1px solid #69685e50;box-shadow:2px 3px 0 #29282315;min-height:115px;padding:25px 20px 17px;transform:rotate(-.6deg);border-radius:2px 4px 2px 3px}.notice-wall .subtopic:nth-child(2){transform:rotate(.7deg)}.notice-wall .subtopic h3{font-size:26px;max-width:92%;margin:4px 0 6px}.notice-wall .subtopic p{font-size:11px;max-width:90%;line-height:1.5}.notice-wall .sub-icon{position:absolute;left:50%;top:8px;width:9px;height:9px;font-size:0}.pin-dot{width:8px;height:8px;background:#b9432b;border:1px solid #823f2c;border-radius:50%;box-shadow:1px 2px 1px #29282340;display:block}.notice-wall .tile-arrow{position:absolute;right:16px;bottom:16px}.community-page .page-note{max-width:660px}@media(min-width:761px){.notice-wall{grid-template-columns:repeat(3,1fr)}.notice-wall .subtopic{min-height:190px}.notice-wall .subtopic h3{font-size:25px}.community-page .subtopic-grid{max-width:900px}.topic-environment{height:125px}}
+
+.packing-room{max-width:660px}.packing-art{height:92px;margin-top:-15px}.packing-art svg{height:92px;width:100%;display:block}.packing-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0}.packing-toolbar>div{flex:1}.packing-count{font-family:Kalam,cursive;font-size:22px}.packing-progress{height:4px;background:#29282315;margin-top:7px;border-radius:2px;overflow:hidden}.packing-progress i{display:block;height:100%;background:#315847;transition:width .2s}.packing-reset{border:1px solid #29282344;border-radius:4px;background:transparent;min-height:44px;padding:10px 12px;font-size:11px}.packing-intro{font-size:12px;color:var(--muted);line-height:1.6;margin:8px 0 20px}.packing-groups{display:grid;gap:16px}.packing-group{border:1px solid #69685e70;background:#fffefa80;border-radius:5px 8px 3px 5px;overflow:hidden}.packing-group summary{font-family:Kalam,cursive;font-size:24px;padding:15px 18px;background:#f1e9d7;cursor:pointer;list-style:none}.packing-group summary:after{content:'−';float:right;color:#b9432b}.packing-group:not([open]) summary:after{content:'+'}.packing-item{display:flex;align-items:center;gap:13px;margin:0;padding:12px 18px;min-height:48px;border-top:1px dashed #69685e30;cursor:pointer}.packing-item input{appearance:auto;display:block;width:19px;height:19px;min-width:19px;margin:0;accent-color:#315847}.packing-item span{font-family:DM,Arial,sans-serif;font-size:12px;line-height:1.5}.packing-item:has(input:checked){background:#31584708}.packing-item input:checked+span{text-decoration:line-through;color:#69685e}.packing-status{font-size:11px;color:var(--muted);margin:18px 0}.packing-group summary:focus-visible{outline:2px solid #b9432b;outline-offset:-4px}@media(min-width:761px){.packing-groups{grid-template-columns:1fr 1fr;align-items:start}}
 </style>
 </head>
 <body>
@@ -1333,6 +1337,108 @@ function bind(root) {
   });
 }
 
+// sofa-oct26/packing.js
+var groups = { "Tickets & identity": ["Tickets", "Digiyatra", "Passport", "AADHAAR Card", "PAN Card", "Office IDs", "Driving License + Documents"], "Money": ["Corporate Credit Cards", "Personal Credit Cards", "Debit Cards", "Cash", "Digital Wallet"], "Clothes & footwear": ["Shoes", "Slippers", "Sandals", "Underwear", "T-Shirts", "Shirts", "Formal Pants", "Track Pants", "Jeans", "Raincoat", "Winter Jackets", "Towels", "Swimming Trunks", "Socks"], "Wash & weather": ["handkerchief", "Masks", "Toothbrush and Paste", "Umbrella", "Watch", "Spectacle Box", "Goggles", "Hair Oil"], "Tech & work": ["Powerbank", "Earphones", "Camera", "Mobile + Charger", "Laptop + Charger"], "Small essentials": ["Medicine", "Food", "Water Bottle", "House Keys", "Extra Polythene Bags", "Newspapers", "Bag", "Side Bag"] };
+function mountPacking(main, hero) {
+  hero.querySelector("h1").textContent = "Things to Carry";
+  const area = document.createElement("section");
+  area.className = "packing-room";
+  area.innerHTML = `<div class="packing-art" aria-hidden="true"><svg viewBox="0 0 340 90"><g fill="none" stroke="#69685e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 80h328M42 30h98q5 0 5 8v38H36V37q0-7 6-7Z" fill="#d8c4a4"/><path d="M73 30V19q0-7 20-7t20 7v11M50 31v42m80-42v42"/><path d="M181 45h63v32h-63Z" fill="#bacdb6"/><path d="m181 46 9-11h44l10 11M192 48v28m40-28v28M268 65h38v12h-38Zm8-14h22v14h-22Z" fill="#e5d7b4"/></g></svg></div><div class="packing-toolbar"><div><span class="packing-count"></span><div class="packing-progress"><i></i></div></div><button class="packing-reset" type="button" aria-label="Reset packing checklist">Unpack all</button></div><p class="packing-intro">Pick what fits your trip. This is a checklist, not a list of things you must carry.</p><div class="packing-groups"></div><p class="packing-status" role="status">Your ticks stay on this device.</p>`;
+  main.append(area);
+  const key = "sofa-packing-v1";
+  let checked = {};
+  try {
+    checked = JSON.parse(localStorage.getItem(key) || "{}");
+  } catch {
+  }
+  const container = area.querySelector(".packing-groups");
+  let total = 0;
+  for (const [name, items] of Object.entries(groups)) {
+    const group = document.createElement("details");
+    group.open = true;
+    group.className = "packing-group";
+    const summary = document.createElement("summary");
+    summary.textContent = name;
+    summary.dataset.cuelumeToggle = "";
+    summary.dataset.cuelumeTheme = "mech";
+    group.append(summary);
+    for (const item of items) {
+      total++;
+      const label = document.createElement("label");
+      label.className = "packing-item";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = !!checked[item];
+      input.dataset.item = item;
+      input.setAttribute("aria-label", item);
+      const text = document.createElement("span");
+      text.textContent = item;
+      label.append(input, text);
+      group.append(label);
+      input.addEventListener("change", () => {
+        checked[item] = input.checked;
+        play(input.checked ? "select" : "close", { theme: "mech", emphasis: "strong" });
+        save();
+        update();
+      });
+    }
+    container.append(group);
+  }
+  const status = area.querySelector(".packing-status");
+  function save() {
+    try {
+      localStorage.setItem(key, JSON.stringify(checked));
+      status.textContent = "Saved on this device.";
+    } catch {
+      status.textContent = "Storage is unavailable. Ticks may not survive closing this page.";
+    }
+  }
+  function update() {
+    let count = area.querySelectorAll("input:checked").length;
+    area.querySelector(".packing-count").textContent = count + " of " + total + " packed";
+    area.querySelector(".packing-progress i").style.width = count / total * 100 + "%";
+  }
+  update();
+  area.querySelector(".packing-reset").addEventListener("click", () => {
+    checked = {};
+    area.querySelectorAll("input").forEach((i2) => i2.checked = false);
+    save();
+    update();
+    play("close", { theme: "mech" });
+    status.textContent = "Unpacked. Ready for a fresh trip.";
+  });
+  const note2 = document.createElement("p");
+  note2.className = "page-note";
+  note2.textContent = "Adapted from the original School of Adults packing list: all 47 items, grouped for easier checking. Airline, security and destination rules vary, so check those separately. No ID numbers, documents or account details are stored here.";
+  main.append(note2);
+}
+
+// sofa-oct26/scenes.js
+function mountScene(main, current2, sub3) {
+  if (sub3) return;
+  const art = { Community: `<path d="M8 84h342M21 12h310v72M27 13v68m298-68v68"/><path d="M144 17h66v25h-66Z" fill="#ece5d3"/><path d="m155 28 6 7 11-13m15 2h13m-13 7h10"/><path d="M107 60q65-20 137 1l-13 12H122Z" fill="#bcbaa7"/><path d="m128 73-3 13m97-13 3 13"/><g fill="#e7bb98"><circle cx="116" cy="43" r="8"/><circle cx="244" cy="43" r="8"/><circle cx="178" cy="50" r="9"/></g><path d="M97 67q0-17 17-16m148 16q0-17-17-16M161 85V71q18-16 34 0v14" fill="#9eb9a3"/><path d="M56 78V48m-11 31h23M54 48q-25-12-13-25 19 9 13 25Zm2-9q21-19 22-4-8 11-22 13Z" fill="#b5bfa1"/><path d="M276 83V49m0 0q-14-24 0-26 17 10 0 26Zm2-5q26-12 20 1-9 11-22 9Z" fill="#c7b885"/>` };
+  if (!art[current2]) return;
+  const scene = document.createElement("div");
+  scene.className = "topic-environment " + current2.toLowerCase() + "-environment";
+  scene.setAttribute("aria-hidden", "true");
+  scene.innerHTML = `<svg viewBox="0 0 360 95" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#69685e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${art[current2]}</g></svg>`;
+  const heading = main.querySelector(".page-heading");
+  heading.after(scene);
+  main.classList.add("scene-page", current2.toLowerCase() + "-page");
+  const grid2 = main.querySelector(".subtopic-grid");
+  if (current2 === "Community") {
+    grid2.classList.add("notice-wall");
+    grid2.querySelectorAll(".subtopic").forEach((a2, i2) => {
+      a2.style.setProperty("--note-color", ["#f2e4b7", "#dde7e6", "#eeddd3"][i2]);
+      a2.dataset.cuelumeTheme = "mech";
+      a2.dataset.cuelumeEmphasis = "strong";
+      a2.querySelector("p").textContent = "The room is taking shape. Join link coming later.";
+      a2.querySelector(".sub-icon").innerHTML = '<span class="pin-dot"></span>';
+      a2.querySelector(".tile-arrow").textContent = "\u2192";
+    });
+  }
+}
+
 // sofa-oct26/train.js
 var KEY = "sofa-train-journey-v1";
 function mountTicket(main, hero) {
@@ -1997,6 +2103,8 @@ if (current && map[current]) {
     note2.className = "page-note";
     note2.textContent = "First resource pass. These links open the provider\u2019s page; they do not check, book or order anything here. Links checked 11 October 2026. Booking and live-running links are still being checked.";
     main.append(note2);
+  } else if (sub2 === "Things to Carry" && current === "Travel") {
+    mountPacking(main, hero);
   } else if (sub2) {
     const note2 = document.createElement("div");
     note2.className = "build-note";
@@ -2042,6 +2150,7 @@ if (current && map[current]) {
   back.href = sub2 ? `?topic=${encodeURIComponent(current)}` : "./";
   back.textContent = sub2 ? "\u2190 Back to " + current : "\u2190 All topics";
   main.append(back);
+  mountScene(main, current, sub2);
   document.title = (sub2 || current) + " - School of Adults";
 }
 </script>
