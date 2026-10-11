@@ -1,20 +1,23 @@
-# School of Adults · October 2026
+# School of Adults - October 2026
 
-A mobile-first adulting resource site. Plain static HTML, CSS and JavaScript, with no framework or build step required to serve it.
+Live: https://5hu3hendu.github.io/SofA-Oct26/
+Repository: https://github.com/5HU3HENDU/SofA-Oct26
 
-The first breadth pass includes the homepage, fourteen topic maps, sixty-three subtopic destinations, and the first Train resource links. Most subtopic destinations are clearly marked as being prepared. No tools or member data.
+Static HTML, CSS and JavaScript. 14 topic maps and 63 subtopic routes. Source-backed depth is restored in 49 subtopics; others show preparation states or genuine source gaps. See BUILD-NOTES.md for the latest coverage and limitations.
 
-## Files
-index.html contains the site styles, script, fonts and emoji art in one self-contained page. sw.js caches the homepage and PWA assets for offline use after a first visit. The manifest and app icons support installation in compatible browsers.
+## Run the editable source
+Serve this folder with a static web server. Its modules, fonts, emoji and topic JSON are local assets. The deployed version is bundled into a self-contained index, plus manifest, service worker and icons.
 
-## Updating
-Upload changed files to the main branch. GitHub Pages serves the repository root. Increment the cache name in sw.js when changing offline assets.
+## Features
+- Editable device-only Train journey ticket, not a valid travel ticket.
+- Device-only Packing and Bedroom checks.
+- Verified external resource links instead of rebuilt third-party services.
+- Typed-area Maps searches, without GPS.
+- Quiet optional sounds and saved preference.
+- Offscreen/background motion pause and reduced-motion support.
+- PWA manifest and network-first offline fallback after a successful online visit.
 
-## Third-party credits
-- PaperCSS 1.9.2, MIT.
-- Rough Notation 0.5.1, MIT.
-- Cuelume 0.2.4, MIT.
-- Kalam and DM Sans fonts, SIL Open Font License.
-- Twemoji graphics, copyright Twitter, Inc. and other contributors, CC-BY 4.0. https://github.com/twitter/twemoji
+No member directory, private profiles, booking, payment, licence applications or music-account connections. Source gaps and held claims still need review. Physical Android installation has not been tested.
 
-The original topic map comes from the School of Adults site. "Watch, Read, Listen" is the current label for its former media topic.
+## Libraries and licenses
+PaperCSS 1.9.2, Rough Notation 0.5.1 and Cuelume 0.2.4 are vendored locally. Their notices are in vendor/. Fonts are Kalam and DM Sans, SIL Open Font License, from Google Fonts. Emoji art is Twemoji (Twitter and contributors), CC-BY 4.0. License files are retained.
