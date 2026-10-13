@@ -1,0 +1,18 @@
+{
+  "name": "Life Skills",
+  "slug": "life-skills",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Life Skills - School of Adults",
+  "description": "Things worth knowing how to do.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Driving",
+    "Swimming",
+    "Hobbies",
+    "Problem Solving"
+  ]
+}
