@@ -1,0 +1,19 @@
+{
+  "name": "Life Events",
+  "slug": "life-events",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Life Events - School of Adults",
+  "description": "Big days. Bigger questions.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Buying Home",
+    "Marriage",
+    "Pregnancy",
+    "Buying a Car",
+    "Moving to A New City"
+  ]
+}
