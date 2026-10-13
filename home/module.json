@@ -1,0 +1,19 @@
+{
+  "name": "Home",
+  "slug": "home",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Home - School of Adults",
+  "description": "Make your corner yours.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Kitchen",
+    "Bedroom",
+    "Living Room",
+    "Bathroom",
+    "Garden"
+  ]
+}
