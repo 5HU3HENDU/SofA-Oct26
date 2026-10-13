@@ -1,0 +1,12 @@
+{
+  "name": "Cab",
+  "slug": "cab",
+  "type": "leaf",
+  "live": false,
+  "parent": "travel",
+  "title": "Cab - Travel | School of Adults",
+  "description": "Book in the provider's app. Use this page for the checks before you get in.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

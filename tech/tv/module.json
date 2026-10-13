@@ -1,0 +1,12 @@
+{
+  "name": "TV",
+  "slug": "tv",
+  "type": "leaf",
+  "live": false,
+  "parent": "tech",
+  "title": "TV - Tech | School of Adults",
+  "description": "TV: guides and useful links from School of Adults.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

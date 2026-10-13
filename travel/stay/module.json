@@ -1,0 +1,12 @@
+{
+  "name": "Stay",
+  "slug": "stay",
+  "type": "leaf",
+  "live": false,
+  "parent": "travel",
+  "title": "Stay - Travel | School of Adults",
+  "description": "The original stay directory, with the different kinds of stay kept separate.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

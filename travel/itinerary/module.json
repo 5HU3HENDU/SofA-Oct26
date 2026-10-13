@@ -1,0 +1,12 @@
+{
+  "name": "Itinerary",
+  "slug": "itinerary",
+  "type": "leaf",
+  "live": false,
+  "parent": "travel",
+  "title": "Itinerary - Travel | School of Adults",
+  "description": "Planning destinations from the original guide. The plan still needs your judgment.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Travel",
+  "slug": "travel",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Travel - School of Adults",
+  "description": "For getting out there.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Places",
+    "Stay",
+    "Flight",
+    "Train",
+    "Bus",
+    "Cab",
+    "Itinerary",
+    "Things to Carry"
+  ]
+}

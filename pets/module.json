@@ -1,0 +1,16 @@
+{
+  "name": "Pets",
+  "slug": "pets",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Pets - School of Adults",
+  "description": "Roommates with paws.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Cats",
+    "Dogs"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Wealth",
+  "slug": "wealth",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Wealth - School of Adults",
+  "description": "Make money make sense.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Generating Wealth",
+    "Investing",
+    "Insurance & Tax",
+    "Spending & Tracking",
+    "Credit Cards & Loans"
+  ]
+}

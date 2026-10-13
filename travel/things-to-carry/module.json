@@ -1,0 +1,13 @@
+{
+  "name": "Things to Carry",
+  "slug": "things-to-carry",
+  "type": "leaf",
+  "live": false,
+  "parent": "travel",
+  "title": "Things to Carry - Travel | School of Adults",
+  "description": "Things to Carry: guides and useful links from School of Adults.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "needs_script": true
+}

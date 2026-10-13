@@ -1,0 +1,12 @@
+{
+  "name": "Bus",
+  "slug": "bus",
+  "type": "leaf",
+  "live": false,
+  "parent": "travel",
+  "title": "Bus - Travel | School of Adults",
+  "description": "The original bus page had one booking destination. Here it is, checked and kept simple.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Power Bank",
+  "slug": "power-bank",
+  "type": "leaf",
+  "live": false,
+  "parent": "tech",
+  "title": "Power Bank - Tech | School of Adults",
+  "description": "Power Bank: guides and useful links from School of Adults.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

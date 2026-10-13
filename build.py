@@ -13,26 +13,33 @@ hdr = open('shared/header.html').read()
 ftr = open('shared/footer.html').read()
 esc = lambda s: html.escape(s, quote=True)
 modules = []
-for p in sorted(glob.glob('*/module.json')):
-    m = json.load(open(p)); m['dir'] = os.path.dirname(p); modules.append(m)
+for p in sorted(glob.glob('**/module.json', recursive=True)):
+    m = json.load(open(p)); m['dir'] = os.path.dirname(p); m['path'] = m['dir'].replace(os.sep, '/'); modules.append(m)
 live = [m for m in modules if m.get('live')]
 for m in modules:
     out = os.path.join(m['dir'], 'index.html')
     if not m.get('live'):
         if os.path.exists(out): os.remove(out)   # greyed out = no page
         continue
-    url = f"{base}/{m['slug']}/"
+    url = f"{base}/{m['path']}/"
     img = base + m['image']
-    ld = {"@context": "https://schema.org", "@graph": [
-        {"@type": "CollectionPage", "@id": url + "#page", "url": url, "name": m['name'],
+    def crumbs(m, url):
+        par = next((x for x in modules if x['path'] == m.get('parent')), None) if m.get('parent') else None
+        out = []
+        if par: out.append({"@type": "ListItem", "position": 2, "name": par['name'], "item": f"{base}/{par['path']}/"})
+        out.append({"@type": "ListItem", "position": len(out) + 2, "name": m['name'], "item": url})
+        return out
+    page_ld = {"@type": m.get('schema_type') or ("WebPage" if m.get('type') == 'leaf' else "CollectionPage"), "@id": url + "#page", "url": url, "name": m['name'],
          "description": m['description'], "dateModified": m['updated'], "inLanguage": "en",
-         "isPartOf": {"@id": base + "/#site"},
-         "mainEntity": {"@type": "ItemList", "itemListElement": [
-             {"@type": "ListItem", "position": i + 1, "name": "School of " + n} for i, n in enumerate(m.get('items', []))]}},
+         "isPartOf": {"@id": base + "/#site"}}
+    if m.get('items'):
+        page_ld["mainEntity"] = {"@type": "ItemList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": m.get('item_prefix', '') + n} for i, n in enumerate(m['items'])]}
+    ld = {"@context": "https://schema.org", "@graph": [
+        page_ld,
         {"@type": "WebSite", "@id": base + "/#site", "url": base + "/", "name": site['name']},
         {"@type": "BreadcrumbList", "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
-            {"@type": "ListItem", "position": 2, "name": m['name'], "item": url}]}]}
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"}] + crumbs(m, url)}]}
     d = date.fromisoformat(m['updated']).strftime('%-d %B %Y')
     page = f'''<!doctype html>
 <html lang="en">
@@ -60,11 +67,11 @@ for m in modules:
 </body></html>
 '''
     open(out, 'w').write(page)
-urls = [(base + '/', site['home_updated'], 'weekly')] + [(f"{base}/{m['slug']}/", m['updated'], m.get('changefreq', 'monthly')) for m in live]
+urls = [(base + '/', site['home_updated'], 'weekly')] + [(f"{base}/{m['path']}/", m['updated'], m.get('changefreq', 'monthly')) for m in live]
 open('sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'<url><loc>{u}</loc><lastmod>{l}</lastmod><changefreq>{c}</changefreq></url>\n' for u, l, c in urls) + '</urlset>\n')
 open('robots.txt', 'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {base}/sitemap.xml\n')
 lines = [f"# {site['name']}", '', f"> {site['description']}", '', '## Pages', '', f"- [Home]({base}/): {site['description']}"]
-lines += [f"- [{m['name']}]({base}/{m['slug']}/): {m['description']}" for m in live]
+lines += [f"- [{m['name']}]({base}/{m['path']}/): {m['description']}" for m in live]
 open('llms.txt', 'w').write('\n'.join(lines) + '\n')
 print('built', [m['slug'] for m in live], 'skipped', [m['slug'] for m in modules if not m.get('live')])

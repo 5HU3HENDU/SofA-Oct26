@@ -1,0 +1,12 @@
+{
+  "name": "Flight",
+  "slug": "flight",
+  "type": "leaf",
+  "live": false,
+  "parent": "travel",
+  "title": "Flight - Travel | School of Adults",
+  "description": "Search, track and check the airport details. Keep the important confirmations.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}

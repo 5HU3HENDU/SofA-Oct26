@@ -23,5 +23,8 @@
     "Sales",
     "Software Engineering",
     "Supply Chain"
-  ]
+  ],
+  "item_prefix": "School of ",
+  "type": "leaf",
+  "schema_type": "CollectionPage"
 }
