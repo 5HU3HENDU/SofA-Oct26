@@ -1,0 +1,18 @@
+{
+  "name": "Career",
+  "slug": "career",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Career - School of Adults",
+  "description": "Find your next chapter.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Choosing Career",
+    "Job Search",
+    "Career Ladder",
+    "Resigning"
+  ]
+}
