@@ -1,0 +1,12 @@
+{
+  "name": "Mental Health",
+  "slug": "mental-health",
+  "type": "leaf",
+  "live": false,
+  "parent": "health",
+  "title": "Mental Health - Health | School of Adults",
+  "description": "Find support. The original wellbeing ideas are not a treatment plan.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}
