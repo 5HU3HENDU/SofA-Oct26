@@ -1,0 +1,12 @@
+{
+  "name": "Roommate",
+  "slug": "roommate",
+  "type": "leaf",
+  "live": false,
+  "parent": "people",
+  "title": "Roommate - People | School of Adults",
+  "description": "Roommate: guides and useful links from School of Adults.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}
