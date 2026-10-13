@@ -1,0 +1,12 @@
+{
+  "name": "Songs",
+  "slug": "songs",
+  "type": "leaf",
+  "live": false,
+  "parent": "content",
+  "title": "Songs - Content | School of Adults",
+  "description": "Start with one song you love. Find something nearby.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}
