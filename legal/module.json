@@ -1,0 +1,15 @@
+{
+  "name": "Legal",
+  "slug": "legal",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Legal - School of Adults",
+  "description": "Know where you stand.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Basic"
+  ]
+}
