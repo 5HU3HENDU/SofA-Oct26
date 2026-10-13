@@ -1,0 +1,27 @@
+{
+  "name": "Community",
+  "slug": "community",
+  "live": true,
+  "parent": null,
+  "title": "Community - WhatsApp groups for every field | School of Adults",
+  "description": "Join School of Adults communities on WhatsApp: analytics, credit risk, marketing, software, finance, HR, legal, design and more. Pick your field and meet people figuring it out too.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "weekly",
+  "items": [
+    "Analytics",
+    "Credit Risk",
+    "CXOs",
+    "Cybersecurity",
+    "Design",
+    "Finance",
+    "Freshers",
+    "Healthcare",
+    "HRs",
+    "Legal",
+    "Marketing",
+    "Sales",
+    "Software Engineering",
+    "Supply Chain"
+  ]
+}
