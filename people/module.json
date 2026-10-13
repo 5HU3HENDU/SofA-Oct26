@@ -1,0 +1,23 @@
+{
+  "name": "People",
+  "slug": "people",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "People - School of Adults",
+  "description": "The wonderfully messy part.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Self",
+    "Parents",
+    "Partner",
+    "Kids",
+    "Friends",
+    "Relatives",
+    "Colleagues",
+    "Roommate",
+    "Enemies"
+  ]
+}
