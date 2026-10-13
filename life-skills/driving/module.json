@@ -1,0 +1,13 @@
+{
+  "name": "Driving",
+  "slug": "driving",
+  "type": "leaf",
+  "live": false,
+  "parent": "life-skills",
+  "title": "Driving - Life Skills | School of Adults",
+  "description": "Learn with an instructor. Check the rules where you drive.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "needs_script": true
+}
