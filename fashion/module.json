@@ -1,0 +1,16 @@
+{
+  "name": "Fashion",
+  "slug": "fashion",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Fashion - School of Adults",
+  "description": "Wear a little you.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Men",
+    "Women"
+  ]
+}
