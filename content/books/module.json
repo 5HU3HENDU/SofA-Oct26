@@ -1,0 +1,12 @@
+{
+  "name": "Books",
+  "slug": "books",
+  "type": "leaf",
+  "live": false,
+  "parent": "content",
+  "title": "Books - Content | School of Adults",
+  "description": "Something to read. Somewhere to find it. People to read with.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}
