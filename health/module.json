@@ -1,0 +1,21 @@
+{
+  "name": "Health",
+  "slug": "health",
+  "type": "tile",
+  "live": false,
+  "parent": null,
+  "title": "Health - School of Adults",
+  "description": "A body. A mind. A little care.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Basics",
+    "Food, Water & Air",
+    "Exercise",
+    "Body",
+    "Check Up",
+    "Mental Health",
+    "Periods"
+  ]
+}
