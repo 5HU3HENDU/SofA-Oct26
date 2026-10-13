@@ -1,0 +1,12 @@
+{
+  "name": "Body",
+  "slug": "body",
+  "type": "leaf",
+  "live": false,
+  "parent": "health",
+  "title": "Body - Health | School of Adults",
+  "description": "The original body-care topics, with unsupported care and product claims left out.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly"
+}
