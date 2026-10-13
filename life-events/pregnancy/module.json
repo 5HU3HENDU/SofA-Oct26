@@ -1,0 +1,13 @@
+{
+  "name": "Pregnancy",
+  "slug": "pregnancy",
+  "type": "leaf",
+  "live": false,
+  "parent": "life-events",
+  "title": "Pregnancy - Life Events | School of Adults",
+  "description": "Find care and prepare a hospital bag. Your care team decides what is right for you.",
+  "updated": "2026-10-13",
+  "image": "/shared/3-og-default.png",
+  "changefreq": "monthly",
+  "needs_script": true
+}
