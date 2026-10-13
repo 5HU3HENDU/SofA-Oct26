@@ -1,4 +1,4 @@
-/* Behaviour every leaf page shares: sound toggle (tap only, off by default), hand-drawn highlights, nav cue. */
+/* Behaviour every page shares: sound toggle (tap only, off by default), hand-drawn highlights, nav cue, install button. */
 (function(){
 var S=window.SofA; if(!S) return;
 var on=false; try{on=localStorage.getItem("sofa-sound")==="on"}catch(e){}
@@ -21,4 +21,12 @@ document.querySelectorAll("[data-rn]").forEach(function(el){ var o=JSON.parse(el
 if(list.length) document.fonts.ready.then(function(){requestAnimationFrame(function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(x){ if(x.isIntersecting){ x.target.__a&&x.target.__a.show(); io.unobserve(x.target);} })},{threshold:.6});
   list.forEach(function(p){ p[0].__a=S.annotate(p[0],p[1]); io.observe(p[0]); }); }); });
+/* install button stays hidden until the browser offers installation */
+var install=document.querySelector("#install"), offer;
+if(install){
+  window.addEventListener("beforeinstallprompt",function(t){t.preventDefault(); offer=t; install.hidden=false});
+  install.addEventListener("click",async function(){ S.w("open",{theme:"press",emphasis:"subtle"}); if(offer){ await offer.prompt(); offer=null; install.hidden=true; } });
+  window.addEventListener("appinstalled",function(){install.hidden=true});
+}
+if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function(){});
 })();

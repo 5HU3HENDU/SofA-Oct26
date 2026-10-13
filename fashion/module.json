@@ -7,10 +7,24 @@
   "title": "Fashion - School of Adults",
   "description": "Wear a little you.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Men",
     "Women"
-  ]
+  ],
+  "order": 9,
+  "tile": {
+    "emoji": [
+      "1f455",
+      "1f457",
+      "1f45f",
+      "1f9e5",
+      "1f576"
+    ],
+    "color": "#f1e7ee",
+    "motion": "sway",
+    "toast": "Fashion is deciding what to wear. Unlocking soon.",
+    "description": "Wear a little you."
+  }
 }

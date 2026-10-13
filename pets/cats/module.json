@@ -7,7 +7,7 @@
   "title": "Cats - Pets | School of Adults",
   "description": "The original cat directory, without calling every food or provider the best.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "needs_script": true
 }

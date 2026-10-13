@@ -7,7 +7,7 @@
   "title": "Wealth - School of Adults",
   "description": "Make money make sense.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Generating Wealth",
@@ -15,5 +15,19 @@
     "Insurance & Tax",
     "Spending & Tracking",
     "Credit Cards & Loans"
-  ]
+  ],
+  "order": 3,
+  "tile": {
+    "emoji": [
+      "1fa99",
+      "1f331",
+      "1f3e6",
+      "1f9fe",
+      "1f4b3"
+    ],
+    "color": "#f7edcf",
+    "motion": "bounce",
+    "toast": "Wealth is still counting its coins. Unlocking soon.",
+    "description": "Make money make sense."
+  }
 }

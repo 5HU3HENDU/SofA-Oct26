@@ -7,9 +7,23 @@
   "title": "Legal - School of Adults",
   "description": "Know where you stand.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Basic"
-  ]
+  ],
+  "order": 13,
+  "tile": {
+    "emoji": [
+      "2696",
+      "1f4dc",
+      "1f58b",
+      "1f4c1",
+      "2696"
+    ],
+    "color": "#ebe8e0",
+    "motion": "sway",
+    "toast": "Legal is reading the fine print. Back soon.",
+    "description": "Know where you stand."
+  }
 }

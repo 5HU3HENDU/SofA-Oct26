@@ -7,12 +7,26 @@
   "title": "Content - School of Adults",
   "description": "A good story goes a long way.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "News",
     "Movies & Shows",
     "Songs",
     "Books"
-  ]
+  ],
+  "order": 14,
+  "tile": {
+    "emoji": [
+      "1f4f0",
+      "1f3ac",
+      "1f3b5",
+      "1f4da",
+      "1f3a7"
+    ],
+    "color": "#eee6dc",
+    "motion": "sway",
+    "toast": "Content is finishing one more chapter. Back soon.",
+    "description": "A good story goes a long way."
+  }
 }

@@ -7,10 +7,24 @@
   "title": "Pets - School of Adults",
   "description": "Roommates with paws.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Cats",
     "Dogs"
-  ]
+  ],
+  "order": 7,
+  "tile": {
+    "emoji": [
+      "1f408",
+      "1f415",
+      "1f43e",
+      "1f9b4",
+      "1f408"
+    ],
+    "color": "#eee8dd",
+    "motion": "bounce",
+    "toast": "Pets took us out for a walk. Back soon.",
+    "description": "Roommates with paws."
+  }
 }

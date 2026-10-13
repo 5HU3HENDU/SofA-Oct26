@@ -7,7 +7,7 @@
   "title": "Travel - School of Adults",
   "description": "For getting out there.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Places",
@@ -18,5 +18,19 @@
     "Cab",
     "Itinerary",
     "Things to Carry"
-  ]
+  ],
+  "order": 8,
+  "tile": {
+    "emoji": [
+      "2708",
+      "1f68c",
+      "1f686",
+      "1f695",
+      "1f5fa"
+    ],
+    "color": "#e6edf0",
+    "motion": "journey",
+    "toast": "Our travel planner is chilling in Japan. We will unlock this soon.",
+    "description": "For getting out there."
+  }
 }

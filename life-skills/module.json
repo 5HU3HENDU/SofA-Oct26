@@ -7,12 +7,26 @@
   "title": "Life Skills - School of Adults",
   "description": "Things worth knowing how to do.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Driving",
     "Swimming",
     "Hobbies",
     "Problem Solving"
-  ]
+  ],
+  "order": 10,
+  "tile": {
+    "emoji": [
+      "1f697",
+      "1f3ca",
+      "1f3a8",
+      "1f9e9",
+      "1f6e0"
+    ],
+    "color": "#edf0e0",
+    "motion": "bounce",
+    "toast": "Life Skills is learning to juggle. Unlocking soon.",
+    "description": "Things worth knowing how to do."
+  }
 }

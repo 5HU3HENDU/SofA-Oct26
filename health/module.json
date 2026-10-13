@@ -7,7 +7,7 @@
   "title": "Health - School of Adults",
   "description": "A body. A mind. A little care.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Basics",
@@ -17,5 +17,19 @@
     "Check Up",
     "Mental Health",
     "Periods"
-  ]
+  ],
+  "order": 2,
+  "tile": {
+    "emoji": [
+      "1f34e",
+      "1f4a7",
+      "1f3c3",
+      "1f9e0",
+      "1f331"
+    ],
+    "color": "#eef0df",
+    "motion": "bounce",
+    "toast": "Our health page is out on a morning run. Back soon.",
+    "description": "A body. A mind. A little care."
+  }
 }

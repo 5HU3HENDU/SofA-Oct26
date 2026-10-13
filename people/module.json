@@ -7,7 +7,7 @@
   "title": "People - School of Adults",
   "description": "The wonderfully messy part.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Self",
@@ -19,5 +19,19 @@
     "Colleagues",
     "Roommate",
     "Enemies"
-  ]
+  ],
+  "order": 6,
+  "tile": {
+    "emoji": [
+      "1f44b",
+      "1faf6",
+      "1fac2",
+      "2615",
+      "1f4ac"
+    ],
+    "color": "#f6e4df",
+    "motion": "sway",
+    "toast": "People are catching up over chai. Back soon.",
+    "description": "The wonderfully messy part."
+  }
 }

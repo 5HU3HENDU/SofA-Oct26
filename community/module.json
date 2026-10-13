@@ -6,7 +6,7 @@
   "title": "Community - WhatsApp groups for every field | School of Adults",
   "description": "Join School of Adults communities on WhatsApp: analytics, credit risk, marketing, software, finance, HR, legal, design and more. Pick your field and meet people figuring it out too.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "weekly",
   "items": [
     "Analytics",
@@ -26,5 +26,14 @@
   ],
   "item_prefix": "School of ",
   "type": "leaf",
-  "schema_type": "CollectionPage"
+  "schema_type": "CollectionPage",
+  "order": 1,
+  "tile": {
+    "emoji": [],
+    "color": "#e7ebdf",
+    "motion": "group",
+    "scene": "tile-scene.svg",
+    "badge": "NEW",
+    "description": "Find people figuring it out too."
+  }
 }

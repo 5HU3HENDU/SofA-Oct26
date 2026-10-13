@@ -7,12 +7,26 @@
   "title": "Career - School of Adults",
   "description": "Find your next chapter.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Choosing Career",
     "Job Search",
     "Career Ladder",
     "Resigning"
-  ]
+  ],
+  "order": 4,
+  "tile": {
+    "emoji": [
+      "1f9ed",
+      "1f4bc",
+      "1fa9c",
+      "2709",
+      "1f3af"
+    ],
+    "color": "#e8ede9",
+    "motion": "sway",
+    "toast": "Career is updating its résumé. Unlocking soon.",
+    "description": "Find your next chapter."
+  }
 }

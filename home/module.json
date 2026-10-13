@@ -7,7 +7,7 @@
   "title": "Home - School of Adults",
   "description": "Make your corner yours.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Kitchen",
@@ -15,5 +15,19 @@
     "Living Room",
     "Bathroom",
     "Garden"
-  ]
+  ],
+  "order": 5,
+  "tile": {
+    "emoji": [
+      "1fab4",
+      "1f6cb",
+      "1f9f9",
+      "1f6cf",
+      "1f3e1"
+    ],
+    "color": "#f2e5db",
+    "motion": "sway",
+    "toast": "Home is looking for its keys. Back soon.",
+    "description": "Make your corner yours."
+  }
 }

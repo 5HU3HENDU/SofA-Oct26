@@ -7,7 +7,7 @@
   "title": "Life Events - School of Adults",
   "description": "Big days. Bigger questions.",
   "updated": "2026-10-13",
-  "image": "/shared/3-og-default.png",
+  "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "items": [
     "Buying Home",
@@ -15,5 +15,19 @@
     "Pregnancy",
     "Buying a Car",
     "Moving to A New City"
-  ]
+  ],
+  "order": 11,
+  "tile": {
+    "emoji": [
+      "1f5dd",
+      "1f48d",
+      "1f37c",
+      "1f697",
+      "1f4e6"
+    ],
+    "color": "#f5ead7",
+    "motion": "sway",
+    "toast": "Life Events is rehearsing its big entrance. Back soon.",
+    "description": "Big days. Bigger questions."
+  }
 }
