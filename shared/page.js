@@ -25,5 +25,5 @@ if(install){
   install.addEventListener("click",async function(){ if(offer){ await offer.prompt(); offer=null; install.hidden=true; } });
   window.addEventListener("appinstalled",function(){install.hidden=true});
 }
-if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function(){});
+if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js",{updateViaCache:"none"}).then(function(r){r.update()}).catch(function(){});
 })();
