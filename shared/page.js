@@ -27,3 +27,60 @@ if(install){
 }
 if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js",{updateViaCache:"none"}).then(function(r){r.update()}).catch(function(){});
 })();
+
+(function(){
+function pick(tab,focus){
+  var list=tab.closest('[role="tablist"]');if(!list)return;
+  var tabs=[].slice.call(list.querySelectorAll('[role="tab"]'));
+  tabs.forEach(function(t){
+    var on=t===tab;
+    t.setAttribute('aria-selected',on?'true':'false');
+    t.tabIndex=on?0:-1;
+    var p=document.getElementById(t.getAttribute('aria-controls'));
+    if(p)p.hidden=!on;
+  });
+  if(focus)tab.focus();
+}
+document.addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('[role="tab"]');
+  if(t)pick(t,false);
+});
+document.addEventListener('keydown',function(e){
+  var t=e.target.closest&&e.target.closest('[role="tab"]');
+  if(!t)return;
+  var tabs=[].slice.call(t.closest('[role="tablist"]').querySelectorAll('[role="tab"]'));
+  var i=tabs.indexOf(t),n=null;
+  if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+  else if(e.key==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+  else if(e.key==='Home')n=tabs[0];
+  else if(e.key==='End')n=tabs[tabs.length-1];
+  if(n){e.preventDefault();pick(n,true);}
+});
+})();
+
+(function(){
+var room=document.querySelector('.packing-room');if(!room)return;
+var K='sofa-packing-v1',saved={};
+try{saved=JSON.parse(localStorage.getItem(K)||'{}')||{}}catch(e){}
+var boxes=[].slice.call(room.querySelectorAll('.packing-item input[type="checkbox"]'));
+var count=room.querySelector('.packing-count'),bar=room.querySelector('.packing-progress i'),status=room.querySelector('.packing-status');
+function show(){
+  var n=boxes.filter(function(b){return b.checked}).length;
+  if(count)count.textContent=n+' of '+boxes.length+' packed';
+  if(bar)bar.style.width=(boxes.length?n/boxes.length*100:0)+'%';
+}
+function save(msg){
+  var o={};boxes.forEach(function(b){if(b.checked)o[b.getAttribute('data-item')]=true});
+  try{localStorage.setItem(K,JSON.stringify(o));if(status)status.textContent=msg||'Saved on this device.'}
+  catch(e){if(status)status.textContent='Storage is unavailable. Ticks may not survive closing this page.'}
+}
+boxes.forEach(function(b){
+  b.checked=!!saved[b.getAttribute('data-item')];
+  b.addEventListener('change',function(){show();save()});
+});
+var reset=room.querySelector('.packing-reset');
+if(reset)reset.addEventListener('click',function(){
+  boxes.forEach(function(b){b.checked=false});show();save('Unpacked. Ready for a fresh trip.');
+});
+show();
+})();

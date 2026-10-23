@@ -2,7 +2,7 @@
   "name": "Spending & Tracking",
   "slug": "spending-tracking",
   "type": "leaf",
-  "live": true,
+  "live": false,
   "parent": "wealth",
   "title": "Spending & Tracking - Wealth | School of Adults",
   "description": "Keep a record of spending and shared bills.",
