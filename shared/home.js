@@ -186,7 +186,14 @@
     var m = T.moving();
     if (m.date && m.home) { var md = T.parse(m.date); if (T.diff(md, t0) >= 0) { var pr = T.movingProgress(m); out.push({ at: md.getTime(), emoji: "1f4e6", label: "Moving", route: "Moving on " + T.fmtD(md), when: pr.done + " of " + pr.total + " tasks done", extra: "", tags: tagFor(md) ? [tagFor(md)] : [], asof: "", href: "/life-events/moving-to-a-new-city/" }); } }
     var h = T.holidays();
-    if (h.home) { var br = T.breaks(h); if (br.breaks.length) { var b0 = br.breaks[0], at0 = b0.start < t0 ? t0 : b0.start, j = br.joins.filter(function (x) { return x.a === b0 || x.b === b0 || (x.a.start <= b0.end && x.b.end >= b0.start); })[0]; out.push({ at: at0.getTime(), emoji: "1f9ed", label: "Next break", route: T.breakText(b0), when: b0.labels.join(" \u00b7 "), extra: j ? "1 leave day (" + T.fmtD(j.day) + ") joins two breaks" : "", tags: tagFor(at0) ? [tagFor(at0)] : [], asof: "", href: "/travel/holidays/" }); } }
+    if (h.home && h.lead != null) {
+      var br = T.breaks(h);
+      br.breaks.forEach(function (b0) {
+        var at0 = b0.start < t0 ? t0 : b0.start; if (T.diff(at0, t0) > h.lead) return;
+        var j = br.joins.filter(function (x) { return x.a === b0 || x.b === b0; })[0];
+        out.push({ at: at0.getTime(), emoji: "1f9ed", label: "Break", route: T.breakText(b0), when: b0.labels.join(" \u00b7 "), extra: j ? "1 leave day (" + T.fmtD(j.day) + ") joins two breaks" : "", tags: tagFor(at0) ? [tagFor(at0)] : [], asof: "", href: "/travel/holidays/" });
+      });
+    }
     return out;
   }
   function packCard() {

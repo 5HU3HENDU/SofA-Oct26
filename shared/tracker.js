@@ -183,7 +183,7 @@
     });
     return out;
   };
-  T.holidays = function () { var o = get(K.hol, {}); o = o && typeof o === "object" ? o : {}; var w = Array.isArray(o.work) ? o.work.filter(function (n, i, a) { return n === (n | 0) && n >= 0 && n < 7 && a.indexOf(n) === i; }) : []; return { work: w, text: str(o.text, 20000), home: o.home !== false }; };
+  T.holidays = function () { var o = get(K.hol, {}); o = o && typeof o === "object" ? o : {}; var w = Array.isArray(o.work) ? o.work.filter(function (n, i, a) { return n === (n | 0) && n >= 0 && n < 7 && a.indexOf(n) === i; }) : []; return { work: w, text: str(o.text, 20000), home: o.home === true, lead: (o.lead != null && +o.lead >= 0 && +o.lead <= 3650 && o.lead !== "") ? Math.round(+o.lead) : null }; };
   /* Breaks are runs of days off (a day off = not a working day, or a listed date) that contain at least one listed date. */
   T.breaks = function (h, from) {
     var p = T.parseHolidays(h.text), keys = Object.keys(p.map).sort(), res = { breaks: [], joins: [], errors: p.errors };
@@ -216,11 +216,17 @@
     root.appendChild(el("p", "cycle-note", "One per line: yyyy-mm-dd Event. For example: 2026-11-08 Diwali. Every date you add counts as a day off."));
     var ta = document.createElement("textarea"); ta.id = "hol-text"; ta.rows = 6; ta.className = "trk-ta"; ta.value = h.text; ta.setAttribute("aria-label", "Your days off, one per line"); root.appendChild(ta);
     var err = el("p", "cycle-error"); err.setAttribute("role", "alert"); err.hidden = true; root.appendChild(err);
-    var hl = el("label", "trk-check"), hc = document.createElement("input"); hc.type = "checkbox"; hc.checked = h.home; hl.appendChild(hc); hl.appendChild(document.createTextNode(" Show my next break on the homepage")); root.appendChild(hl);
+    var hl = el("label", "trk-check"), hc = document.createElement("input"); hc.type = "checkbox"; hc.checked = h.home; hl.appendChild(hc); hl.appendChild(document.createTextNode(" Show my breaks on the homepage")); root.appendChild(hl);
+    var ll = el("label", "cycle-fields"); var lw = el("label"); lw.appendChild(document.createTextNode("Show breaks that start within this many days")); var li = document.createElement("input"); li.type = "number"; li.min = "0"; li.max = "3650"; li.inputMode = "numeric"; li.placeholder = "e.g. 30"; li.id = "hol-lead"; li.value = h.lead == null ? "" : h.lead; lw.appendChild(li); ll.appendChild(lw); root.appendChild(ll);
+    var herr = el("p", "cycle-error"); herr.setAttribute("role", "alert"); herr.hidden = true; root.appendChild(herr);
+    root.appendChild(el("p", "cycle-note", "Every break that starts within your chosen days shows on the homepage, none left out. You choose the number; nothing is assumed."));
     var out = el("div", "trk-list"); root.appendChild(out);
-    function save(s) { s.text = ta.value; s.home = hc.checked; set(K.hol, { v: 1, work: s.work, text: s.text, home: s.home }); T.mountHolidays(root); }
+    function leadVal() { return li.value !== "" && +li.value >= 0 && +li.value <= 3650 ? Math.round(+li.value) : null; }
+    function persist(s) { s.text = ta.value; s.home = hc.checked; s.lead = leadVal(); set(K.hol, { v: 2, work: s.work, text: s.text, home: s.home, lead: s.lead }); }
+    function save(s) { persist(s); T.mountHolidays(root); }
     ta.addEventListener("change", function () { var s = T.holidays(); save(s); });
-    hc.addEventListener("change", function () { var s = T.holidays(); s.text = ta.value; s.home = hc.checked; set(K.hol, { v: 1, work: s.work, text: s.text, home: s.home }); });
+    function opt() { var s = T.holidays(); persist(s); herr.hidden = !(hc.checked && leadVal() == null); if (!herr.hidden) herr.textContent = "Enter how many days ahead to show breaks (0 to 3650)."; }
+    hc.addEventListener("change", opt); li.addEventListener("change", opt); li.addEventListener("input", opt);
     var r = T.breaks(h);
     if (r.errors.length) { err.hidden = false; err.textContent = "Not understood: " + r.errors.slice(0, 5).map(function (e) { return "line " + e.line + " (" + e.text + ")"; }).join("; ") + ". Use yyyy-mm-dd Event."; }
     if (!h.work.length) { out.appendChild(el("p", "cycle-note", "Pick your working days to see your breaks.")); return; }
