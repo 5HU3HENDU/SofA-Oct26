@@ -2,7 +2,7 @@
   "name": "Books",
   "slug": "books",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "content",
   "title": "Books - Content | School of Adults",
   "description": "Something to read. Somewhere to find it. People to read with.",

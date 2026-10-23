@@ -2,7 +2,7 @@
   "name": "Partner",
   "slug": "partner",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "people",
   "title": "Partner - People | School of Adults",
   "description": "Partner: guides and useful links from School of Adults.",

@@ -2,7 +2,7 @@
   "name": "Investing",
   "slug": "investing",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "wealth",
   "title": "Investing - Wealth | School of Adults",
   "description": "The original investing resource map. A directory, not a portfolio or return forecast.",

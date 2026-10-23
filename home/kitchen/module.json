@@ -2,7 +2,7 @@
   "name": "Kitchen",
   "slug": "kitchen",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "home",
   "title": "Kitchen - Home | School of Adults",
   "description": "Start with a few things you'll use. Build the rest around how you actually cook.",

@@ -2,7 +2,7 @@
   "name": "Earphones",
   "slug": "earphones",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "tech",
   "title": "Earphones - Tech | School of Adults",
   "description": "Earphones: guides and useful links from School of Adults.",

@@ -2,7 +2,7 @@
   "name": "Train",
   "slug": "train",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Train - Travel | School of Adults",
   "description": "Train: guides and useful links from School of Adults.",

@@ -2,7 +2,7 @@
   "name": "Tech",
   "slug": "tech",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Tech - School of Adults",
   "description": "Less spec talk. Better choices.",

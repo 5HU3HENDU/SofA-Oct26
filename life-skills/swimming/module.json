@@ -2,7 +2,7 @@
   "name": "Swimming",
   "slug": "swimming",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "life-skills",
   "title": "Swimming - Life Skills | School of Adults",
   "description": "Start with instruction, not a guess at the deep end.",

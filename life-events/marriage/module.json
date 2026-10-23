@@ -2,7 +2,7 @@
   "name": "Marriage",
   "slug": "marriage",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "life-events",
   "title": "Marriage - Life Events | School of Adults",
   "description": "The original marriage directory, with privacy and safety ahead of profiles.",

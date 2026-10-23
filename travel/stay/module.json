@@ -2,7 +2,7 @@
   "name": "Stay",
   "slug": "stay",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Stay - Travel | School of Adults",
   "description": "The original stay directory, with the different kinds of stay kept separate.",

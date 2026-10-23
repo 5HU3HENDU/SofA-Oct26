@@ -2,7 +2,7 @@
   "name": "Job Search",
   "slug": "job-search",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "career",
   "title": "Job Search - Career | School of Adults",
   "description": "Find leads. Prepare real examples. Keep your next move grounded.",

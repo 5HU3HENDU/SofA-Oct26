@@ -2,7 +2,7 @@
   "name": "Bathroom",
   "slug": "bathroom",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "home",
   "title": "Bathroom - Home | School of Adults",
   "description": "Keep the everyday things easy to reach, then use the right help for the messy jobs.",

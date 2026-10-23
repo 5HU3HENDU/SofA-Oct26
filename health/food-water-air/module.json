@@ -2,7 +2,7 @@
   "name": "Food, Water & Air",
   "slug": "food-water-air",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "health",
   "title": "Food, Water & Air - Health | School of Adults",
   "description": "Food, water and air need context. The old one-size-fits-all rules are held.",

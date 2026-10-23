@@ -2,7 +2,7 @@
   "name": "Life Skills",
   "slug": "life-skills",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Life Skills - School of Adults",
   "description": "Things worth knowing how to do.",

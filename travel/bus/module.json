@@ -2,7 +2,7 @@
   "name": "Bus",
   "slug": "bus",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Bus - Travel | School of Adults",
   "description": "The original bus page had one booking destination. Here it is, checked and kept simple.",

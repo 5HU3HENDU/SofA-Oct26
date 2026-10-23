@@ -2,7 +2,7 @@
   "name": "Mental Health",
   "slug": "mental-health",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "health",
   "title": "Mental Health - Health | School of Adults",
   "description": "Find support. The original wellbeing ideas are not a treatment plan.",

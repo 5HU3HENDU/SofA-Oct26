@@ -2,7 +2,7 @@
   "name": "Bedroom",
   "slug": "bedroom",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "home",
   "title": "Bedroom - Home | School of Adults",
   "description": "A place to land at the end of the day. Give the everyday things a home first.",

@@ -2,7 +2,7 @@
   "name": "Check Up",
   "slug": "check-up",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "health",
   "title": "Check Up - Health | School of Adults",
   "description": "Discuss the tests you need before choosing a package.",

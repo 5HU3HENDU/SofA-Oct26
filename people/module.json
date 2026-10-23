@@ -2,7 +2,7 @@
   "name": "People",
   "slug": "people",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "People - School of Adults",
   "description": "The wonderfully messy part.",

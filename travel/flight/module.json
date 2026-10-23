@@ -2,7 +2,7 @@
   "name": "Flight",
   "slug": "flight",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Flight - Travel | School of Adults",
   "description": "Search, track and check the airport details. Keep the important confirmations.",

@@ -2,7 +2,7 @@
   "name": "Mobile",
   "slug": "mobile",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "tech",
   "title": "Mobile - Tech | School of Adults",
   "description": "A place to compare, buy, sell or look at refurbished phones.",

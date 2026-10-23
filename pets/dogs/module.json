@@ -2,7 +2,7 @@
   "name": "Dogs",
   "slug": "dogs",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "pets",
   "title": "Dogs - Pets | School of Adults",
   "description": "The original dog directory, without calling every food or provider the best.",

@@ -2,7 +2,7 @@
   "name": "Travel",
   "slug": "travel",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Travel - School of Adults",
   "description": "For getting out there.",

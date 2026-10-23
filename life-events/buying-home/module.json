@@ -2,7 +2,7 @@
   "name": "Buying Home",
   "slug": "buying-home",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "life-events",
   "title": "Buying Home - Life Events | School of Adults",
   "description": "The original Buying Home page offered one rent-vs-buy tool. That is the depth available to restore.",

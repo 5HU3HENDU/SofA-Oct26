@@ -2,7 +2,7 @@
   "name": "Cab",
   "slug": "cab",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Cab - Travel | School of Adults",
   "description": "Book in the provider's app. Use this page for the checks before you get in.",

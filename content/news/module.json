@@ -2,7 +2,7 @@
   "name": "News",
   "slug": "news",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "content",
   "title": "News - Content | School of Adults",
   "description": "Read the headlines. Follow the source. Leave room to check.",

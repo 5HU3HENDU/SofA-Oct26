@@ -2,7 +2,7 @@
   "name": "Power Bank",
   "slug": "power-bank",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "tech",
   "title": "Power Bank - Tech | School of Adults",
   "description": "Power Bank: guides and useful links from School of Adults.",

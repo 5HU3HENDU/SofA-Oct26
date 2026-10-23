@@ -2,7 +2,7 @@
   "name": "Kids",
   "slug": "kids",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "people",
   "title": "Kids - People | School of Adults",
   "description": "Find local places, then explore the original learning destinations together.",

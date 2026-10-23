@@ -2,7 +2,7 @@
   "name": "Wealth",
   "slug": "wealth",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Wealth - School of Adults",
   "description": "Make money make sense.",

@@ -2,7 +2,7 @@
   "name": "Legal",
   "slug": "legal",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Legal - School of Adults",
   "description": "Know where you stand.",

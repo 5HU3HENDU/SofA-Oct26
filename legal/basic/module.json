@@ -2,7 +2,7 @@
   "name": "Basic",
   "slug": "basic",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "legal",
   "title": "Basic - Legal | School of Adults",
   "description": "Find official court information, legal-aid routes and the original service directory.",

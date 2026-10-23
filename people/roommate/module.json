@@ -2,7 +2,7 @@
   "name": "Roommate",
   "slug": "roommate",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "people",
   "title": "Roommate - People | School of Adults",
   "description": "Roommate: guides and useful links from School of Adults.",

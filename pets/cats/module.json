@@ -2,7 +2,7 @@
   "name": "Cats",
   "slug": "cats",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "pets",
   "title": "Cats - Pets | School of Adults",
   "description": "The original cat directory, without calling every food or provider the best.",

@@ -2,7 +2,7 @@
   "name": "Content",
   "slug": "content",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Content - School of Adults",
   "description": "A good story goes a long way.",

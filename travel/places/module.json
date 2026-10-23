@@ -2,7 +2,7 @@
   "name": "Places",
   "slug": "places",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Places - Travel | School of Adults",
   "description": "Eight cities from the original notebook. Explore the names, not a promise of what's open today.",

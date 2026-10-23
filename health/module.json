@@ -2,7 +2,7 @@
   "name": "Health",
   "slug": "health",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Health - School of Adults",
   "description": "A body. A mind. A little care.",

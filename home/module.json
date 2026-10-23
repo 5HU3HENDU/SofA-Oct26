@@ -2,7 +2,7 @@
   "name": "Home",
   "slug": "home",
   "type": "tile",
-  "live": false,
+  "live": true,
   "parent": null,
   "title": "Home - School of Adults",
   "description": "Make your corner yours.",

@@ -2,7 +2,7 @@
   "name": "Itinerary",
   "slug": "itinerary",
   "type": "leaf",
-  "live": false,
+  "live": true,
   "parent": "travel",
   "title": "Itinerary - Travel | School of Adults",
   "description": "Planning destinations from the original guide. The plan still needs your judgment.",
