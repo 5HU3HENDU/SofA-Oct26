@@ -75,7 +75,7 @@
     return { text: (tag ? tag + ", " : "") + text, tag: tag };
   }
   function asOf(c) { var t = ms(c); return isFinite(t) ? "As of " + fmt(new Date(t), "Asia/Kolkata", { day: "numeric", month: "short" }) + ", " + fmt(new Date(t), "Asia/Kolkata", { hour: "numeric", minute: "2-digit", hour12: true }).toLowerCase() : ""; }
-  function place(s) { s = str(s, 100); var i = s.indexOf("\u00b7"); return (i >= 0 ? s.slice(i + 1) : s).trim(); }
+  function place(s) { s = str(s, 100); var i = s.indexOf("\u00b7"); return (i >= 0 ? s.slice(i + 1) : s).replace(/\s+(Jn\.?|Junction)$/i, "").trim(); }
   function items() {
     var now = Date.now(), out = [], seen = {};
     read("pnr-tracker-trips-v1").forEach(function (t) {
