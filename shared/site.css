@@ -154,3 +154,6 @@
 .tile-grid .subtopic h3{font-size:1.45rem;line-height:1.15;margin:0}
 .tile-grid .subtopic .tile-arrow{position:static;margin-left:0}
 @media(min-width:760px){.subtopic-grid.tile-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}}
+.guide-resource strong{color:var(--red);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:#b9432b80}
+.guide-resource:hover strong,.guide-resource:focus-visible strong{text-decoration-color:currentColor}
+.hobby-link{color:var(--red);text-decoration:underline;text-underline-offset:3px}
