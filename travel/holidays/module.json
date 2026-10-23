@@ -1,0 +1,13 @@
+{
+  "name": "Holidays",
+  "slug": "holidays",
+  "type": "leaf",
+  "live": true,
+  "parent": "travel",
+  "title": "Holidays - Travel | School of Adults",
+  "description": "Enter the days you are off. Breaks and leave days that join two breaks are worked out from your entries.",
+  "updated": "2026-10-23",
+  "image": "/shared/og-default.png",
+  "changefreq": "monthly",
+  "needs_script": true
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Reminders",
+  "slug": "reminders",
+  "type": "leaf",
+  "live": true,
+  "parent": "life-skills",
+  "title": "Reminders - Life Skills | School of Adults",
+  "description": "Things you want to be reminded about. You choose the date, the repeat and how many days ahead it shows up.",
+  "updated": "2026-10-23",
+  "image": "/shared/og-default.png",
+  "changefreq": "monthly",
+  "needs_script": true
+}

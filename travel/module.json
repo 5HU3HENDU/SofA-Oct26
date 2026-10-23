@@ -17,7 +17,8 @@
     "Bus",
     "Cab",
     "Itinerary",
-    "Things to Carry"
+    "Things to Carry",
+    "Holidays"
   ],
   "order": 8,
   "tile": {

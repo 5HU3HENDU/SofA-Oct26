@@ -82,7 +82,7 @@ def module_page(m, modules):
         page_ld, {"@type": "WebSite", "@id": base + "/#site", "url": base + "/", "name": site['name']}, breadcrumbs(m, modules)]}
     content = open(os.path.join(m['dir'], 'content.html')).read().replace('<main ', '<main id="main" ', 1)
     main = content.replace('</main>', f'<p class="last-updated">Last updated {nice_date(m["updated"])}</p></main>')
-    scripts = '<script src="/shared/lib.js"></script><script src="/shared/page.js"></script>'
+    scripts = '<script src="/shared/lib.js"></script><script src="/shared/page.js"></script><script src="/shared/tracker.js"></script>'
     return page(head(m['title'], m['description'], m['url'], m['image'], ld), main, scripts)
 
 
@@ -117,7 +117,7 @@ def home_page(modules):
          "dateModified": site['home_updated'], "isPartOf": {"@id": base + "/#site"},
          "mainEntity": {"@type": "ItemList", "itemListElement": [
              {"@type": "ListItem", "position": i + 1, "name": m['name'], "url": m['url']} for i, m in enumerate(live)]}}]}
-    scripts = '<script src="/shared/lib.js"></script><script src="/shared/page.js"></script><script src="/shared/home.js"></script>'
+    scripts = '<script src="/shared/lib.js"></script><script src="/shared/page.js"></script><script src="/shared/tracker.js"></script><script src="/shared/home.js"></script>'
     return page(head(site['title'], site['description'], base + '/', site['image'], ld), main, scripts)
 
 

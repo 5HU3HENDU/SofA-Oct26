@@ -62,7 +62,6 @@
 (function () {
   var sec = document.getElementById("heads-up"), list = document.getElementById("heads-up-list");
   if (!sec || !list) return;
-  var MAX = 5;
   function read(key) { try { var v = JSON.parse(localStorage.getItem(key) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
   function ms(s) { var n = Date.parse(s); return isFinite(n) ? n : NaN; }
   function str(v, n) { return typeof v === "string" ? v.slice(0, n || 80) : ""; }
@@ -90,7 +89,7 @@
       var cls = str(t.cls, 60).split(/[\u00b7 ]/)[0], bits = [];
       if (cls) bits.push(cls);
       if (t.coach) bits.push(str(t.coach, 16) + (Array.isArray(t.berths) && t.berths.length ? " berths " + t.berths.slice(0, 6).map(function (b) { return str(b, 8); }).join(", ") : ""));
-      var o = { kind: "train", at: dep, emoji: "1f686", label: "Train " + str(t.train, 24), route: place(t.from) + " \u2192 " + place(t.to), when: w.text, extra: bits.join(" \u00b7 "), tags: tags, asof: asOf(t.checked), href: "/travel/train/", checked: t.checked };
+      var o = { kind: "train", trip: true, at: dep, emoji: "1f686", label: "Train " + str(t.train, 24), route: place(t.from) + " \u2192 " + place(t.to), when: w.text, extra: bits.join(" \u00b7 "), tags: tags, asof: asOf(t.checked), href: "/travel/train/", checked: t.checked };
       seen[k] = o; out = out.filter(function (x) { return x !== prev; }); out.push(o);
     });
     read("sofa-flight-trips-v1").forEach(function (t) {
@@ -103,7 +102,7 @@
       if (st && !/^(scheduled|on time)$/i.test(st)) tags.push("\u26a0\ufe0f " + st);
       var extra = !bk || /^unverified$/i.test(bk) ? "booking not verified" : bk;
       var from = str(t.fromName, 60) || str(t.from, 3);
-      var o = { kind: "flight", at: dep, emoji: "2708", label: "Flight " + str(t.al, 3) + " " + str(t.no, 4), route: from + (t.depTerminal ? " " + str(t.depTerminal, 12) : "") + " \u2192 " + (str(t.toName, 60) || str(t.to, 3)), when: w.text, extra: extra, tags: tags, asof: asOf(t.checked), href: "/travel/flight/", checked: t.checked };
+      var o = { kind: "flight", trip: true, at: dep, emoji: "2708", label: "Flight " + str(t.al, 3) + " " + str(t.no, 4), route: from + (t.depTerminal ? " " + str(t.depTerminal, 12) : "") + " \u2192 " + (str(t.toName, 60) || str(t.to, 3)), when: w.text, extra: extra, tags: tags, asof: asOf(t.checked), href: "/travel/flight/", checked: t.checked };
       seen[k] = o; out = out.filter(function (x) { return x !== prev; }); out.push(o);
     });
     return out.sort(function (a, b) { return a.at - b.at; });
@@ -163,19 +162,74 @@
     var f = el("div", "hu-foot"); f.appendChild(el("span", "", n + " of " + o.plan.length + " done this week")); card.appendChild(f);
     return card;
   }
+  /* Other saved things: reminders, own trip plans, check-up due, moving, next break, packing. All from this browser. */
+  function tagFor(at) { var n = Math.round((new Date(at.getFullYear(), at.getMonth(), at.getDate()) - new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) / 864e5); return n === 0 ? "Today" : n === 1 ? "Tomorrow" : ""; }
+  function more() {
+    var T = window.SofAT, out = []; if (!T) return out;
+    var t0 = T.today();
+    T.rems().forEach(function (r) {
+      if (r.done || !r.home) return; var d = T.parse(r.date), n = T.diff(d, t0); if (n > r.lead) return;
+      var tags = n < 0 ? ["\u26a0\ufe0f Overdue"] : (tagFor(d) ? [tagFor(d)] : []);
+      out.push({ at: d.getTime(), overdue: n < 0, emoji: r.cat === "pet" ? "1f43e" : r.cat === "plant" ? "1fab4" : "1f9fe", label: r.cat === "pet" ? "Pet care" : r.cat === "plant" ? "Plant care" : "Reminder", route: r.who ? r.who + " \u00b7 " + r.title : r.title, when: T.fmtD(d) + " \u00b7 " + T.dueText(r), extra: "", tags: tags, asof: "", href: "/life-skills/reminders/" });
+    });
+    var now = Date.now();
+    T.trips().forEach(function (t) {
+      var st = Date.parse(t.start), en = t.end ? Date.parse(t.end) : new Date(new Date(t.start).getFullYear(), new Date(t.start).getMonth(), new Date(t.start).getDate() + 1).getTime();
+      if (en < now) return;
+      var labels = { stay: "Stay", bus: "Bus", cab: "Cab", other: "Trip" }, em = { stay: "1f3e1", bus: "1f68c", cab: "1f695", other: "1f5fa" };
+      var started = t.type === "stay" && st <= now, at = started ? en : st, when = t.type === "stay" ? (started ? "Check-out " + T.fmtDT(t.end) : "Check-in " + T.fmtDT(t.start)) : T.tripWhen(t);
+      var tg = tagFor(new Date(at));
+      out.push({ trip: true, at: at, emoji: em[t.type], label: labels[t.type] + " \u00b7 " + t.title, route: [t.from, t.to].filter(Boolean).join(" \u2192 ") || t.title, when: when, extra: "your own entry", tags: tg ? [tg] : [], asof: "", href: t.type === "stay" ? "/travel/stay/" : t.type === "bus" ? "/travel/bus/" : t.type === "cab" ? "/travel/cab/" : "/travel/" });
+    });
+    var c = T.checkup();
+    if (c && c.home) { var cn = T.diff(c.due, t0); if (cn <= c.lead) out.push({ at: c.due.getTime(), overdue: cn < 0, emoji: "1f34e", label: "Check-up", route: "Check-up due", when: T.fmtD(c.due) + " \u00b7 " + (cn < 0 ? "overdue by " + -cn + (cn === -1 ? " day" : " days") : cn === 0 ? "due today" : "due in " + cn + (cn === 1 ? " day" : " days")), extra: "", tags: cn < 0 ? ["\u26a0\ufe0f Overdue"] : (tagFor(c.due) ? [tagFor(c.due)] : []), asof: "", href: "/health/check-up/" }); }
+    var m = T.moving();
+    if (m.date && m.home) { var md = T.parse(m.date); if (T.diff(md, t0) >= 0) { var pr = T.movingProgress(m); out.push({ at: md.getTime(), emoji: "1f4e6", label: "Moving", route: "Moving on " + T.fmtD(md), when: pr.done + " of " + pr.total + " tasks done", extra: "", tags: tagFor(md) ? [tagFor(md)] : [], asof: "", href: "/life-events/moving-to-a-new-city/" }); } }
+    var h = T.holidays();
+    if (h.home) { var br = T.breaks(h); if (br.breaks.length) { var b0 = br.breaks[0], at0 = b0.start < t0 ? t0 : b0.start, j = br.joins.filter(function (x) { return x.a === b0 || x.b === b0 || (x.a.start <= b0.end && x.b.end >= b0.start); })[0]; out.push({ at: at0.getTime(), emoji: "1f9ed", label: "Next break", route: T.breakText(b0), when: b0.labels.join(" \u00b7 "), extra: j ? "1 leave day (" + T.fmtD(j.day) + ") joins two breaks" : "", tags: tagFor(at0) ? [tagFor(at0)] : [], asof: "", href: "/travel/holidays/" }); } }
+    return out;
+  }
+  function packCard() {
+    var T = window.SofAT; if (!T) return null; var s = T.packSummary(), need = s ? s.total - (s.na || 0) : 0;
+    if (s && need > 0 && s.packed >= need) return null;
+    return { emoji: "1f4e6", label: "Packing", route: "Packing list", when: s ? s.packed + " of " + need + " packed" : "Not started", extra: "", tags: [], asof: "", href: "/travel/things-to-carry/" };
+  }
   function render() {
-    var all = items(), ex = exCard(); list.textContent = "";
+    var all = items().concat(more()), ex = exCard(); list.textContent = "";
+    all.sort(function (a, b) { return ((b.overdue ? 1 : 0) - (a.overdue ? 1 : 0)) || (a.at - b.at); });
+    var pk = all.some(function (o) { return o.trip; }) ? packCard() : null;
     if (!all.length && !ex) { sec.hidden = true; return; }
     if (all.length) {
-      var shown = all.slice(0, MAX);
-      list.appendChild(card(shown[0], true, "#f3e6c4"));
-      if (shown.length > 1) { list.appendChild(el("p", "hu-later", "Later")); shown.slice(1).forEach(function (o) { list.appendChild(card(o, false, "#eef0df")); }); }
-      if (all.length > MAX) list.appendChild(el("p", "hu-more", "+" + (all.length - MAX) + " more saved on the Train and Flight pages"));
+      list.appendChild(card(all[0], true, "#f3e6c4"));
+      if (all.length > 1) { list.appendChild(el("p", "hu-later", "Later")); all.slice(1).forEach(function (o) { list.appendChild(card(o, false, "#eef0df")); }); }
     }
+    if (pk) list.appendChild(card(pk, false, "#eef0df"));
     if (ex) list.appendChild(ex);
     sec.hidden = false;
   }
   render();
   window.addEventListener("pageshow", render);
   window.addEventListener("storage", render);
+})();
+
+/* Back up or move saved data: one code covering everything this browser saves on the site. */
+(function () {
+  var body = document.getElementById("backup-body"), T = window.SofAT; if (!body || !T) return;
+  var el = T.el;
+  body.appendChild(el("p", "cycle-note", "Everything you save here lives only in this browser. Make a code to keep a copy or move it to a new phone. The code includes all your saved items, health dates too, so keep it private."));
+  var mk = el("button", "cycle-clear", "Create backup code"); mk.type = "button"; body.appendChild(mk);
+  var out = document.createElement("textarea"); out.className = "trk-ta"; out.rows = 4; out.readOnly = true; out.hidden = true; out.setAttribute("aria-label", "Backup code"); body.appendChild(out);
+  var cp = el("button", "cycle-clear", "Copy code"); cp.type = "button"; cp.hidden = true; body.appendChild(cp);
+  var msg = el("p", "cycle-note"); msg.setAttribute("role", "status"); body.appendChild(msg);
+  mk.addEventListener("click", function () { var r = T.exportCode(); if (!r.count) { out.hidden = cp.hidden = true; msg.textContent = "Nothing is saved on this device yet."; return; } out.value = r.code; out.hidden = cp.hidden = false; msg.textContent = "Code ready: " + r.count + " saved " + (r.count === 1 ? "item" : "items") + "."; });
+  cp.addEventListener("click", function () { out.select(); var ok = false; try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(out.value); ok = true; } else ok = document.execCommand("copy"); } catch (e) {} msg.textContent = ok ? "Copied." : "Select the code and copy it."; });
+  body.appendChild(el("h3", "", "Restore from a code"));
+  var inp = document.createElement("textarea"); inp.className = "trk-ta"; inp.rows = 4; inp.setAttribute("aria-label", "Paste a backup code"); inp.placeholder = "Paste a backup code"; body.appendChild(inp);
+  var mg = el("button", "cycle-clear", "Add to what is here"); mg.type = "button"; var rp = el("button", "cycle-clear", "Replace what is here"); rp.type = "button";
+  body.appendChild(mg); body.appendChild(rp);
+  var msg2 = el("p", "cycle-note"); msg2.setAttribute("role", "status"); body.appendChild(msg2);
+  var armed = false;
+  function run(mode) { try { var n = T.importCode(inp.value, mode); msg2.textContent = "Restored " + n + " saved " + (n === 1 ? "item" : "items") + (mode === "replace" ? ", replacing what was here." : ", added to what was here."); inp.value = ""; window.dispatchEvent(new Event("storage")); } catch (e) { msg2.textContent = e.message; } armed = false; rp.textContent = "Replace what is here"; }
+  mg.addEventListener("click", function () { run("merge"); });
+  rp.addEventListener("click", function () { try { T.importCode(inp.value, "merge", true); } catch (e) { msg2.textContent = e.message; return; } if (!armed) { armed = true; rp.textContent = "Tap again to replace everything saved here"; msg2.textContent = "This removes what is saved on this device first."; return; } run("replace"); });
 })();

@@ -60,23 +60,31 @@ document.addEventListener('keydown',function(e){
 
 (function(){
 var room=document.querySelector('.packing-room');if(!room)return;
-var K='sofa-packing-v1',saved={};
+var K='sofa-packing-v1',KN='sofa-packing-na-v1',KS='sofa-packing-sum-v1',saved={},na={};
 try{saved=JSON.parse(localStorage.getItem(K)||'{}')||{}}catch(e){}
+try{na=JSON.parse(localStorage.getItem(KN)||'{}')||{}}catch(e){}
 var boxes=[].slice.call(room.querySelectorAll('.packing-item input[type="checkbox"]'));
 var count=room.querySelector('.packing-count'),bar=room.querySelector('.packing-progress i'),status=room.querySelector('.packing-status');
+function isNa(b){return !!na[b.getAttribute('data-item')]}
 function show(){
-  var n=boxes.filter(function(b){return b.checked}).length;
-  if(count)count.textContent=n+' of '+boxes.length+' packed';
-  if(bar)bar.style.width=(boxes.length?n/boxes.length*100:0)+'%';
+  var need=boxes.filter(function(b){return !isNa(b)}),n=need.filter(function(b){return b.checked}).length,nn=boxes.length-need.length;
+  if(count)count.textContent=n+' of '+need.length+' packed'+(nn?' ('+nn+' not needed)':'');
+  if(bar)bar.style.width=(need.length?n/need.length*100:0)+'%';
+  try{localStorage.setItem(KS,JSON.stringify({total:boxes.length,packed:n,na:nn}))}catch(e){}
 }
 function save(msg){
   var o={};boxes.forEach(function(b){if(b.checked)o[b.getAttribute('data-item')]=true});
-  try{localStorage.setItem(K,JSON.stringify(o));if(status)status.textContent=msg||'Saved on this device.'}
+  try{localStorage.setItem(K,JSON.stringify(o));localStorage.setItem(KN,JSON.stringify(na));if(status)status.textContent=msg||'Saved on this device.'}
   catch(e){if(status)status.textContent='Storage is unavailable. Ticks may not survive closing this page.'}
 }
 boxes.forEach(function(b){
-  b.checked=!!saved[b.getAttribute('data-item')];
+  var it=b.getAttribute('data-item'),lab=b.closest('.packing-item');
+  b.checked=!!saved[it];
   b.addEventListener('change',function(){show();save()});
+  var x=document.createElement('button');x.type='button';x.className='packing-na';
+  function paint(){var v=!!na[it];lab.classList.toggle('is-na',v);x.textContent=v?'Needed':'Not needed';x.setAttribute('aria-pressed',v?'true':'false');x.setAttribute('aria-label',(v?'Mark needed: ':'Mark not needed: ')+it)}
+  x.addEventListener('click',function(ev){ev.preventDefault();ev.stopPropagation();if(na[it])delete na[it];else{na[it]=true;b.checked=false}paint();show();save()});
+  lab.appendChild(x);paint();
 });
 var reset=room.querySelector('.packing-reset');
 if(reset)reset.addEventListener('click',function(){

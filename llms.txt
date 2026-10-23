@@ -43,6 +43,7 @@
 - [Hobbies](https://schoolofadults.com/life-skills/hobbies/): Try something with your hands, your feet, or a friend.
 - [Life Skills](https://schoolofadults.com/life-skills/): Things worth knowing how to do.
 - [Problem Solving](https://schoolofadults.com/life-skills/problem-solving/): Problem Solving: guides and useful links from School of Adults.
+- [Reminders](https://schoolofadults.com/life-skills/reminders/): Things you want to be reminded about. You choose the date, the repeat and how many days ahead it shows up.
 - [Swimming](https://schoolofadults.com/life-skills/swimming/): Start with instruction, not a guess at the deep end.
 - [Colleagues](https://schoolofadults.com/people/colleagues/): Colleagues: guides and useful links from School of Adults.
 - [Enemies](https://schoolofadults.com/people/enemies/): Enemies: guides and useful links from School of Adults.
@@ -65,6 +66,7 @@
 - [Bus](https://schoolofadults.com/travel/bus/): One place to book a bus.
 - [Cab](https://schoolofadults.com/travel/cab/): Book in the provider's app. Use this page for the checks before you get in.
 - [Flight](https://schoolofadults.com/travel/flight/): Flight: save your booking PNR or flight number, see your flight ticket, and open live flight status.
+- [Holidays](https://schoolofadults.com/travel/holidays/): Enter the days you are off. Breaks and leave days that join two breaks are worked out from your entries.
 - [Itinerary](https://schoolofadults.com/travel/itinerary/): Planning destinations. The plan still needs your judgment.
 - [Travel](https://schoolofadults.com/travel/): For getting out there.
 - [Places](https://schoolofadults.com/travel/places/): Eight cities. Explore the names, not a promise of what's open today.
