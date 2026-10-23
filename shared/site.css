@@ -184,3 +184,18 @@
 .cycle-dates{list-style:none;margin:0;padding:0}.cycle-dates li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #c7c2b7;font-size:15px}.cycle-dates li{text-indent:0}.cycle-dates li:before{content:none}.cycle-x{box-shadow:none!important;transform:none!important;font:inherit;font-size:13px;background:none;border:0;color:var(--red);text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px;padding:0 4px}
 
 .packing-groups h2{font-size:26px!important;line-height:1.2!important;margin:24px 0 8px!important}
+
+/* Home: "Heads up" feed built from the visitor's own saved trips (localStorage). */
+.heads-up{margin:0 0 22px}.heads-up[hidden]{display:none}
+.hu-card{display:block;position:relative;border:1.5px solid var(--ink);border-radius:5px 11px 7px 9px;box-shadow:2px 3px 0 #29282315;background:var(--tile,#eef0df);padding:11px 13px;margin:0 0 10px;color:inherit;text-decoration:none;min-width:0}
+.hu-card:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.hu-top{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;flex-wrap:wrap}.hu-top img{width:20px;height:20px;flex:none;border:0;background:none;box-shadow:none;padding:0;border-radius:0}
+.hu-tag{font-size:10.5px;border:1.2px solid var(--ink);border-radius:99px;padding:1px 8px;background:#fff8;white-space:nowrap;font-weight:700}
+.hu-top .hu-tag{margin-left:auto}
+.hu-route{font-family:Kalam,cursive;font-weight:700;font-size:17px;line-height:1.15;margin:4px 0 1px;overflow-wrap:anywhere}
+.hu-when{font-size:13px}
+.hu-foot{font-size:11px;opacity:.7;margin-top:5px;display:flex;justify-content:space-between;gap:8px}
+.hu-big{padding:16px 15px 13px}.hu-big .hu-top{font-size:14px}.hu-big .hu-top img{width:36px;height:36px}
+.hu-big .hu-route{font-size:27px;line-height:1.1;margin:10px 0 3px}.hu-big .hu-when{font-size:15px}
+.hu-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.hu-big .hu-tag{font-size:11.5px;padding:2px 9px}.hu-big .hu-foot{font-size:12px}
+.hu-later{font-size:12px;opacity:.7;margin:0 0 6px}.hu-more{font-size:12px;opacity:.7;margin:0}
