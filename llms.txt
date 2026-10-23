@@ -23,7 +23,6 @@
 - [Body](https://schoolofadults.com/health/body/): Body care, one topic at a time.
 - [Check Up](https://schoolofadults.com/health/check-up/): Discuss the tests you need before choosing a package.
 - [Exercise](https://schoolofadults.com/health/exercise/): Movement, hobby and equipment resources. Not a prescribed workout.
-- [Food, Water & Air](https://schoolofadults.com/health/food-water-air/): Food, water and air need context.
 - [Mental Health](https://schoolofadults.com/health/mental-health/): Find support. These ideas are not a treatment plan.
 - [Health](https://schoolofadults.com/health/): A body. A mind. A little care.
 - [Periods](https://schoolofadults.com/health/periods/): Period care: products, tracking and learning, kept separate.

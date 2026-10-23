@@ -157,3 +157,5 @@
 .guide-resource strong{color:var(--red);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:#b9432b80}
 .guide-resource:hover strong,.guide-resource:focus-visible strong{text-decoration-color:currentColor}
 .hobby-link{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+.tile-grid .subtopic.topic-locked{filter:grayscale(1);cursor:default;pointer-events:none}
+.tile-grid .subtopic.topic-locked .stamp{position:static;align-self:flex-start;font-size:10px}
