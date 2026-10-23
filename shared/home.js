@@ -120,13 +120,59 @@
     var f = el("div", "hu-foot"); f.appendChild(el("span", "", o.asof)); f.appendChild(el("span", "", "\u2197")); a.appendChild(f);
     return a;
   }
+  /* Exercise: planned weekdays and per-date completion, from sofa-exercise-v1 (set on the Exercise page). */
+  var EXK = "sofa-exercise-v1", DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], FULL = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  function exLoad() {
+    try {
+      var o = JSON.parse(localStorage.getItem(EXK)); if (!o || typeof o !== "object") o = {};
+      var p = Array.isArray(o.plan) ? o.plan.filter(function (n, i, a) { return n === (n | 0) && n >= 0 && n < 7 && a.indexOf(n) === i; }) : [];
+      return { plan: p, done: o.done && typeof o.done === "object" && !Array.isArray(o.done) ? o.done : {} };
+    } catch (e) { return { plan: [], done: {} }; }
+  }
+  function exSave(o) {
+    var cut = new Date(), keep = {}, c; cut.setDate(cut.getDate() - 400); c = ymd(cut);
+    Object.keys(o.done).forEach(function (k) { if (/^\d{4}-\d{2}-\d{2}$/.test(k) && k >= c && o.done[k]) keep[k] = 1; });
+    try { localStorage.setItem(EXK, JSON.stringify({ v: 1, plan: o.plan, done: keep })); } catch (e) {}
+  }
+  function ymd(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function exCard() {
+    var o = exLoad(); if (!o.plan.length) return null;
+    var now = new Date(), dow = (now.getDay() + 6) % 7, mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dow), n = 0;
+    var card = el("div", "hu-card hu-ex"); card.style.setProperty("--tile", "#eef0df");
+    var top = el("div", "hu-top"), img = document.createElement("img"); img.src = "/shared/emoji/1f3c3.svg"; img.alt = ""; img.setAttribute("aria-hidden", "true");
+    top.appendChild(img); top.appendChild(el("span", "", "Exercise \u00b7 this week"));
+    var pl = el("a", "hu-tag", "Plan \u2197"); pl.href = "/health/exercise/"; top.appendChild(pl); card.appendChild(top);
+    var wk = el("div", "hu-week"); wk.setAttribute("role", "group"); wk.setAttribute("aria-label", "Exercise this week");
+    for (var i = 0; i < 7; i++) {
+      var dt = new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + i), key = ymd(dt), planned = o.plan.indexOf(i) >= 0, done = planned && !!o.done[key], future = i > dow;
+      if (done) n++;
+      var b = el("button", "hu-day " + (planned ? "plan" : "rest") + (done ? " done" : "") + (i === dow ? " today" : "") + (planned && future ? " future" : ""));
+      b.type = "button"; b.setAttribute("data-date", key);
+      b.appendChild(el("span", "hd", DAYS[i])); b.appendChild(el("span", "ck", done ? "\u2713" : ""));
+      var live = planned && !future; b.setAttribute("aria-label", FULL[i] + (planned ? (done ? ", done" : future ? ", planned" : ", planned, not done") : ", rest day"));
+      if (planned) b.setAttribute("aria-pressed", done ? "true" : "false");
+      if (!live) b.setAttribute("aria-disabled", "true");
+      wk.appendChild(b);
+    }
+    wk.addEventListener("click", function (ev) {
+      var b = ev.target.closest && ev.target.closest(".hu-day"); if (!b || b.getAttribute("aria-disabled") === "true") return;
+      var s = exLoad(), k = b.getAttribute("data-date"); if (s.done[k]) delete s.done[k]; else s.done[k] = 1; exSave(s); render();
+      var again = list.querySelector('.hu-day[data-date="' + k + '"]'); if (again) again.focus();
+    });
+    card.appendChild(wk);
+    var f = el("div", "hu-foot"); f.appendChild(el("span", "", n + " of " + o.plan.length + " done this week")); card.appendChild(f);
+    return card;
+  }
   function render() {
-    var all = items(); list.textContent = "";
-    if (!all.length) { sec.hidden = true; return; }
-    var shown = all.slice(0, MAX);
-    list.appendChild(card(shown[0], true, "#f3e6c4"));
-    if (shown.length > 1) { list.appendChild(el("p", "hu-later", "Later")); shown.slice(1).forEach(function (o) { list.appendChild(card(o, false, "#eef0df")); }); }
-    if (all.length > MAX) list.appendChild(el("p", "hu-more", "+" + (all.length - MAX) + " more saved on the Train and Flight pages"));
+    var all = items(), ex = exCard(); list.textContent = "";
+    if (!all.length && !ex) { sec.hidden = true; return; }
+    if (all.length) {
+      var shown = all.slice(0, MAX);
+      list.appendChild(card(shown[0], true, "#f3e6c4"));
+      if (shown.length > 1) { list.appendChild(el("p", "hu-later", "Later")); shown.slice(1).forEach(function (o) { list.appendChild(card(o, false, "#eef0df")); }); }
+      if (all.length > MAX) list.appendChild(el("p", "hu-more", "+" + (all.length - MAX) + " more saved on the Train and Flight pages"));
+    }
+    if (ex) list.appendChild(ex);
     sec.hidden = false;
   }
   render();
