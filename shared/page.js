@@ -68,7 +68,7 @@ var count=room.querySelector('.packing-count'),bar=room.querySelector('.packing-
 function isNa(b){return !!na[b.getAttribute('data-item')]}
 function show(){
   var need=boxes.filter(function(b){return !isNa(b)}),n=need.filter(function(b){return b.checked}).length,nn=boxes.length-need.length;
-  if(count)count.textContent=n+' of '+need.length+' packed'+(nn?' ('+nn+' not needed)':'');
+  if(count)count.textContent=n+' of '+need.length+' packed'+(nn?' ('+nn+' ignored)':'');
   if(bar)bar.style.width=(need.length?n/need.length*100:0)+'%';
   try{localStorage.setItem(KS,JSON.stringify({total:boxes.length,packed:n,na:nn}))}catch(e){}
 }
@@ -82,7 +82,7 @@ boxes.forEach(function(b){
   b.checked=!!saved[it];
   b.addEventListener('change',function(){show();save()});
   var x=document.createElement('button');x.type='button';x.className='packing-na';
-  function paint(){var v=!!na[it];lab.classList.toggle('is-na',v);x.textContent=v?'Needed':'Not needed';x.setAttribute('aria-pressed',v?'true':'false');x.setAttribute('aria-label',(v?'Mark needed: ':'Mark not needed: ')+it)}
+  function paint(){var v=!!na[it];lab.classList.toggle('is-na',v);x.textContent=v?'Needed':'Ignore';x.setAttribute('aria-pressed',v?'true':'false');x.setAttribute('aria-label',(v?'Mark needed: ':'Ignore: ')+it)}
   x.addEventListener('click',function(ev){ev.preventDefault();ev.stopPropagation();if(na[it])delete na[it];else{na[it]=true;b.checked=false}paint();show();save()});
   lab.appendChild(x);paint();
 });
