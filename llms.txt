@@ -64,7 +64,7 @@
 - [TV](https://schoolofadults.com/tech/tv/): TV: guides and useful links from School of Adults.
 - [Bus](https://schoolofadults.com/travel/bus/): One place to book a bus.
 - [Cab](https://schoolofadults.com/travel/cab/): Book in the provider's app. Use this page for the checks before you get in.
-- [Flight](https://schoolofadults.com/travel/flight/): Search, track and check the airport details. Keep the important confirmations.
+- [Flight](https://schoolofadults.com/travel/flight/): Flight: save your booking PNR or flight number, see your flight ticket, and open live flight status.
 - [Itinerary](https://schoolofadults.com/travel/itinerary/): Planning destinations. The plan still needs your judgment.
 - [Travel](https://schoolofadults.com/travel/): For getting out there.
 - [Places](https://schoolofadults.com/travel/places/): Eight cities. Explore the names, not a promise of what's open today.

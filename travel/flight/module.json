@@ -5,8 +5,9 @@
   "live": true,
   "parent": "travel",
   "title": "Flight - Travel | School of Adults",
-  "description": "Search, track and check the airport details. Keep the important confirmations.",
-  "updated": "2026-10-13",
+  "description": "Flight: save your booking PNR or flight number, see your flight ticket, and open live flight status.",
+  "updated": "2026-10-23",
   "image": "/shared/og-default.png",
-  "changefreq": "monthly"
+  "changefreq": "monthly",
+  "needs_script": true
 }
