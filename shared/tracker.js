@@ -319,4 +319,17 @@
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", auto); else auto();
+
+  /* Rebuild the packing summary from the packing page's own item list plus the saved ticks and not-needed marks. */
+  var derivePending = false;
+  T.deriveSummary = function (cb) {
+    if (derivePending) return; derivePending = true;
+    fetch("/travel/things-to-carry/", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, "text/html"), ids = [].map.call(doc.querySelectorAll(".packing-item input[data-item]"), function (i) { return i.getAttribute("data-item"); });
+      if (!ids.length) throw 0;
+      var pk = get(K.pack, {}) || {}, na = get(K.packNa, {}) || {}, nn = 0, p = 0;
+      ids.forEach(function (id) { if (na[id]) nn++; else if (pk[id]) p++; });
+      if (localStorage.getItem(K.pack) || localStorage.getItem(K.packNa)) set(K.packSum, { total: ids.length, packed: p, na: nn });
+    }).catch(function () {}).then(function () { derivePending = false; if (cb) cb(); });
+  };
 })();

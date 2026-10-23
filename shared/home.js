@@ -197,7 +197,9 @@
     return out;
   }
   function packCard() {
-    var T = window.SofAT; if (!T) return null; var s = T.packSummary(), need = s ? s.total - (s.na || 0) : 0;
+    var T = window.SofAT; if (!T) return null; var s = T.packSummary();
+    if (!s && !window.__sofaDerived && (localStorage.getItem("sofa-packing-v1") || localStorage.getItem("sofa-packing-na-v1"))) { window.__sofaDerived = 1; T.deriveSummary(render); return null; }
+    var need = s ? s.total - (s.na || 0) : 0;
     if (s && need > 0 && s.packed >= need) return null;
     return { emoji: "1f4e6", label: "Packing", route: "Packing list", when: s ? s.packed + " of " + need + " packed" : "Not started", extra: "", tags: [], asof: "", href: "/travel/things-to-carry/" };
   }
@@ -236,7 +238,7 @@
   body.appendChild(mg); body.appendChild(rp);
   var msg2 = el("p", "cycle-note"); msg2.setAttribute("role", "status"); body.appendChild(msg2);
   var armed = false;
-  function run(mode) { try { var n = T.importCode(inp.value, mode); msg2.textContent = "Restored " + n + " saved " + (n === 1 ? "item" : "items") + (mode === "replace" ? ", replacing what was here." : ", added to what was here."); inp.value = ""; window.dispatchEvent(new Event("storage")); } catch (e) { msg2.textContent = e.message; } armed = false; rp.textContent = "Replace what is here"; }
+  function run(mode) { try { var n = T.importCode(inp.value, mode); msg2.textContent = "Restored " + n + " saved " + (n === 1 ? "item" : "items") + (mode === "replace" ? ", replacing what was here." : ", added to what was here."); inp.value = ""; T.deriveSummary(function () { window.dispatchEvent(new Event("storage")); }); } catch (e) { msg2.textContent = e.message; } armed = false; rp.textContent = "Replace what is here"; }
   mg.addEventListener("click", function () { run("merge"); });
   rp.addEventListener("click", function () { try { T.importCode(inp.value, "merge", true); } catch (e) { msg2.textContent = e.message; return; } if (!armed) { armed = true; rp.textContent = "Tap again to replace everything saved here"; msg2.textContent = "This removes what is saved on this device first."; return; } run("replace"); });
 })();
