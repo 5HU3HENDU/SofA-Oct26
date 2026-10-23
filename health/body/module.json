@@ -2,7 +2,7 @@
   "name": "Body",
   "slug": "body",
   "type": "leaf",
-  "live": true,
+  "live": false,
   "parent": "health",
   "title": "Body - Health | School of Adults",
   "description": "Body care, one topic at a time.",
