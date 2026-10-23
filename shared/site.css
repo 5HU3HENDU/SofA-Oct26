@@ -179,3 +179,4 @@
 .cycle-phase em{font-style:normal;font-size:13px;color:var(--muted);line-height:1.5}
 .cp0{--ph:#c9644e}.cp1{--ph:#d9b86a}.cp2{--ph:#7fa37a}.cp3{--ph:#8d86b8}
 .cycle-clear{font:inherit;font-size:14px;margin:10px 0;padding:8px 14px;border:1px solid #29282380;border-radius:5px;background:transparent;color:var(--ink);cursor:pointer;min-height:44px}
+.topic-header{justify-content:flex-start}
