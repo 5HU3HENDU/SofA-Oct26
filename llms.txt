@@ -18,26 +18,26 @@
 - [Songs](https://schoolofadults.com/content/songs/): Start with one song you love. Find something nearby.
 - [Men](https://schoolofadults.com/fashion/men/): Plan what you wear, then check the actual clothing and store details.
 - [Fashion](https://schoolofadults.com/fashion/): Wear a little you.
-- [Women](https://schoolofadults.com/fashion/women/): Closet planning, clothing and beauty destinations from the original directory.
-- [Basics](https://schoolofadults.com/health/basics/): Find help and review the original health resources. This page does not diagnose or treat.
-- [Body](https://schoolofadults.com/health/body/): The original body-care topics, with unsupported care and product claims left out.
+- [Women](https://schoolofadults.com/fashion/women/): Closet planning, clothing and beauty.
+- [Basics](https://schoolofadults.com/health/basics/): Find help and health resources. This page does not diagnose or treat.
+- [Body](https://schoolofadults.com/health/body/): Body care, one topic at a time.
 - [Check Up](https://schoolofadults.com/health/check-up/): Discuss the tests you need before choosing a package.
-- [Exercise](https://schoolofadults.com/health/exercise/): The original movement, hobby and equipment resources. Not a prescribed workout.
-- [Food, Water & Air](https://schoolofadults.com/health/food-water-air/): Food, water and air need context. The old one-size-fits-all rules are held.
-- [Mental Health](https://schoolofadults.com/health/mental-health/): Find support. The original wellbeing ideas are not a treatment plan.
+- [Exercise](https://schoolofadults.com/health/exercise/): Movement, hobby and equipment resources. Not a prescribed workout.
+- [Food, Water & Air](https://schoolofadults.com/health/food-water-air/): Food, water and air need context.
+- [Mental Health](https://schoolofadults.com/health/mental-health/): Find support. These ideas are not a treatment plan.
 - [Health](https://schoolofadults.com/health/): A body. A mind. A little care.
-- [Periods](https://schoolofadults.com/health/periods/): The original period-care directory, with product, tracking and learning links kept separate.
+- [Periods](https://schoolofadults.com/health/periods/): Period care: products, tracking and learning, kept separate.
 - [Bathroom](https://schoolofadults.com/home/bathroom/): Keep the everyday things easy to reach, then use the right help for the messy jobs.
 - [Bedroom](https://schoolofadults.com/home/bedroom/): A place to land at the end of the day. Give the everyday things a home first.
-- [Garden](https://schoolofadults.com/home/garden/): The original school's gardening shelf: a reference to read, and places to browse plants and supplies.
+- [Garden](https://schoolofadults.com/home/garden/): Gardening: a reference to read, and places to browse plants and supplies.
 - [Kitchen](https://schoolofadults.com/home/kitchen/): Start with a few things you'll use. Build the rest around how you actually cook.
-- [Living Room](https://schoolofadults.com/home/living-room/): Your original living-room shelf, rebuilt around three jobs: plan the room, get help, find furniture.
+- [Living Room](https://schoolofadults.com/home/living-room/): Plan the room, get help, find furniture.
 - [Home](https://schoolofadults.com/home/): Make your corner yours.
-- [Basic](https://schoolofadults.com/legal/basic/): Find official court information, legal-aid routes and the original service directory.
+- [Basic](https://schoolofadults.com/legal/basic/): Find official court information, legal-aid routes and a service directory.
 - [Legal](https://schoolofadults.com/legal/): Know where you stand.
-- [Buying a Car](https://schoolofadults.com/life-events/buying-a-car/): Keep the original buying questions. Leave the unsupported numbers behind.
-- [Buying Home](https://schoolofadults.com/life-events/buying-home/): The original Buying Home page offered one rent-vs-buy tool. That is the depth available to restore.
-- [Marriage](https://schoolofadults.com/life-events/marriage/): The original marriage directory, with privacy and safety ahead of profiles.
+- [Buying a Car](https://schoolofadults.com/life-events/buying-a-car/): Questions to ask before you buy a car.
+- [Buying Home](https://schoolofadults.com/life-events/buying-home/): A rent-vs-buy tool to start with.
+- [Marriage](https://schoolofadults.com/life-events/marriage/): Marriage resources, with privacy and safety ahead of profiles.
 - [Life Events](https://schoolofadults.com/life-events/): Big days. Bigger questions.
 - [Moving to A New City](https://schoolofadults.com/life-events/moving-to-a-new-city/): Move your things. Then check the details that follow you.
 - [Pregnancy](https://schoolofadults.com/life-events/pregnancy/): Find care and prepare a hospital bag. Your care team decides what is right for you.
@@ -49,33 +49,33 @@
 - [Colleagues](https://schoolofadults.com/people/colleagues/): Colleagues: guides and useful links from School of Adults.
 - [Enemies](https://schoolofadults.com/people/enemies/): Enemies: guides and useful links from School of Adults.
 - [Friends](https://schoolofadults.com/people/friends/): Friends: guides and useful links from School of Adults.
-- [Kids](https://schoolofadults.com/people/kids/): Find local places, then explore the original learning destinations together.
+- [Kids](https://schoolofadults.com/people/kids/): Find local places, then explore learning destinations together.
 - [People](https://schoolofadults.com/people/): The wonderfully messy part.
-- [Parents](https://schoolofadults.com/people/parents/): Community, experienced work and care destinations from the original guide.
+- [Parents](https://schoolofadults.com/people/parents/): Community, experienced work and care destinations.
 - [Partner](https://schoolofadults.com/people/partner/): Partner: guides and useful links from School of Adults.
 - [Relatives](https://schoolofadults.com/people/relatives/): Relatives: guides and useful links from School of Adults.
 - [Roommate](https://schoolofadults.com/people/roommate/): Roommate: guides and useful links from School of Adults.
 - [Self](https://schoolofadults.com/people/self/): Self: guides and useful links from School of Adults.
-- [Cats](https://schoolofadults.com/pets/cats/): The original cat directory, without calling every food or provider the best.
-- [Dogs](https://schoolofadults.com/pets/dogs/): The original dog directory, without calling every food or provider the best.
+- [Cats](https://schoolofadults.com/pets/cats/): Care, food and providers for cats.
+- [Dogs](https://schoolofadults.com/pets/dogs/): Care, food and providers for dogs.
 - [Pets](https://schoolofadults.com/pets/): Roommates with paws.
 - [Earphones](https://schoolofadults.com/tech/earphones/): Earphones: guides and useful links from School of Adults.
 - [Mobile](https://schoolofadults.com/tech/mobile/): A place to compare, buy, sell or look at refurbished phones.
 - [Tech](https://schoolofadults.com/tech/): Less spec talk. Better choices.
 - [Power Bank](https://schoolofadults.com/tech/power-bank/): Power Bank: guides and useful links from School of Adults.
 - [TV](https://schoolofadults.com/tech/tv/): TV: guides and useful links from School of Adults.
-- [Bus](https://schoolofadults.com/travel/bus/): The original bus page had one booking destination. Here it is, checked and kept simple.
+- [Bus](https://schoolofadults.com/travel/bus/): One place to book a bus.
 - [Cab](https://schoolofadults.com/travel/cab/): Book in the provider's app. Use this page for the checks before you get in.
 - [Flight](https://schoolofadults.com/travel/flight/): Search, track and check the airport details. Keep the important confirmations.
-- [Itinerary](https://schoolofadults.com/travel/itinerary/): Planning destinations from the original guide. The plan still needs your judgment.
+- [Itinerary](https://schoolofadults.com/travel/itinerary/): Planning destinations. The plan still needs your judgment.
 - [Travel](https://schoolofadults.com/travel/): For getting out there.
-- [Places](https://schoolofadults.com/travel/places/): Eight cities from the original notebook. Explore the names, not a promise of what's open today.
-- [Stay](https://schoolofadults.com/travel/stay/): The original stay directory, with the different kinds of stay kept separate.
+- [Places](https://schoolofadults.com/travel/places/): Eight cities. Explore the names, not a promise of what's open today.
+- [Stay](https://schoolofadults.com/travel/stay/): Places to stay, with the different kinds kept separate.
 - [Things to Carry](https://schoolofadults.com/travel/things-to-carry/): Things to Carry: guides and useful links from School of Adults.
 - [Train](https://schoolofadults.com/travel/train/): Train: save your PNR, see your boarding pass, and open live PNR status.
 - [Credit Cards & Loans](https://schoolofadults.com/wealth/credit-cards-loans/): Understand the destination before applying. These are resources, not a borrowing recommendation.
-- [Generating Wealth](https://schoolofadults.com/wealth/generating-wealth/): Four original resources for services, digital products and print products.
-- [Insurance & Tax](https://schoolofadults.com/wealth/insurance-tax/): The original insurance and tax destinations. Learn first; choose policies and filing help for your own situation.
-- [Investing](https://schoolofadults.com/wealth/investing/): The original investing resource map. A directory, not a portfolio or return forecast.
+- [Generating Wealth](https://schoolofadults.com/wealth/generating-wealth/): Resources for services, digital products and print products.
+- [Insurance & Tax](https://schoolofadults.com/wealth/insurance-tax/): Insurance and tax. Learn first; choose policies and filing help for your own situation.
+- [Investing](https://schoolofadults.com/wealth/investing/): Investing resources. A directory, not a portfolio or return forecast.
 - [Wealth](https://schoolofadults.com/wealth/): Make money make sense.
-- [Spending & Tracking](https://schoolofadults.com/wealth/spending-tracking/): Keep a record of spending and shared bills. The original account-security promises are held.
+- [Spending & Tracking](https://schoolofadults.com/wealth/spending-tracking/): Keep a record of spending and shared bills.

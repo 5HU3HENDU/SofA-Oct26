@@ -5,7 +5,7 @@
   "live": true,
   "parent": "travel",
   "title": "Bus - Travel | School of Adults",
-  "description": "The original bus page had one booking destination. Here it is, checked and kept simple.",
+  "description": "One place to book a bus.",
   "updated": "2026-10-13",
   "image": "/shared/og-default.png",
   "changefreq": "monthly"
