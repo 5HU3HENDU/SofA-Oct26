@@ -5,8 +5,8 @@
   "live": true,
   "parent": "travel",
   "title": "Train - Travel | School of Adults",
-  "description": "Train: guides and useful links from School of Adults.",
-  "updated": "2026-10-13",
+  "description": "Train: save your PNR, see your boarding pass, and open live PNR status.",
+  "updated": "2026-10-23",
   "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "needs_script": true

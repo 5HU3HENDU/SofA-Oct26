@@ -72,7 +72,7 @@
 - [Places](https://schoolofadults.com/travel/places/): Eight cities from the original notebook. Explore the names, not a promise of what's open today.
 - [Stay](https://schoolofadults.com/travel/stay/): The original stay directory, with the different kinds of stay kept separate.
 - [Things to Carry](https://schoolofadults.com/travel/things-to-carry/): Things to Carry: guides and useful links from School of Adults.
-- [Train](https://schoolofadults.com/travel/train/): Train: guides and useful links from School of Adults.
+- [Train](https://schoolofadults.com/travel/train/): Train: save your PNR, see your boarding pass, and open live PNR status.
 - [Credit Cards & Loans](https://schoolofadults.com/wealth/credit-cards-loans/): Understand the destination before applying. These are resources, not a borrowing recommendation.
 - [Generating Wealth](https://schoolofadults.com/wealth/generating-wealth/): Four original resources for services, digital products and print products.
 - [Insurance & Tax](https://schoolofadults.com/wealth/insurance-tax/): The original insurance and tax destinations. Learn first; choose policies and filing help for your own situation.
