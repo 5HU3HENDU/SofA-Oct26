@@ -1,4 +1,4 @@
-/* Behaviour every page shares: sound toggle (tap only, off by default), hand-drawn highlights, nav cue, install button. */
+/* Behaviour every page shares: sound toggle (tap only, off by default), hand-drawn highlights, install button. */
 (function(){
 var S=window.SofA; if(!S) return;
 var on=false; try{on=localStorage.getItem("sofa-sound")==="on"}catch(e){}
@@ -9,10 +9,7 @@ function paint(){ if(!btn) return;
   btn.setAttribute("aria-pressed",String(on)); btn.setAttribute("aria-label",on?"Sound on":"Sound off"); btn.title=on?"Turn sound off":"Turn sound on";
   btn.innerHTML='<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 11h5l6-5v16l-6-5H5Z"/>'+(on?'<path d="M20 10q5 4 0 8m3-11q8 7 0 14"/>':'<path class="muted-line" d="m20 11 6 6m0-6-6 6"/>')+'</svg>'; }
 paint();
-var brand=document.querySelector(".brand"); if(brand) brand.addEventListener("click",function(){S.navCue("home")});
 if(btn) btn.addEventListener("click",function(){ on=!on; S.setEnabled(on); paint(); try{localStorage.setItem("sofa-sound",on?"on":"off")}catch(e){} if(on) S.w("toggle",{theme:"press",emphasis:"subtle"}); });
-document.addEventListener("click",function(t){ if(!on||t.defaultPrevented||t.ctrlKey||t.metaKey||t.shiftKey||t.altKey) return;
-  var a=t.target.closest&&t.target.closest("a[data-cuelume-navigate]"); if(a&&a.target!=="_blank"){ t.preventDefault(); setTimeout(function(){location.href=a.href},220); } });
 document.addEventListener("visibilitychange",function(){document.body.classList.toggle("paused",document.hidden)});
 /* hand-drawn highlights: spans carry their stroke settings in data-rn; replace the static CSS fallback */
 var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches, list=[];
@@ -25,7 +22,7 @@ if(list.length) document.fonts.ready.then(function(){requestAnimationFrame(funct
 var install=document.querySelector("#install"), offer;
 if(install){
   window.addEventListener("beforeinstallprompt",function(t){t.preventDefault(); offer=t; install.hidden=false});
-  install.addEventListener("click",async function(){ S.w("open",{theme:"press",emphasis:"subtle"}); if(offer){ await offer.prompt(); offer=null; install.hidden=true; } });
+  install.addEventListener("click",async function(){ if(offer){ await offer.prompt(); offer=null; install.hidden=true; } });
   window.addEventListener("appinstalled",function(){install.hidden=true});
 }
 if("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function(){});
