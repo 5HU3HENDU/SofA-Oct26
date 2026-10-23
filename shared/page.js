@@ -3,7 +3,7 @@
 var S=window.SofA; if(!S) return;
 var on=false; try{on=localStorage.getItem("sofa-sound")==="on"}catch(e){}
 document.body.dataset.cuelumeEmphasis="subtle";
-S.setEnabled(on); S.setVolume(.12); S.setTheme("press"); S.bind();
+S.setEnabled(on); S.setVolume(1); S.setTheme("press"); S.bind();
 var btn=document.querySelector("#sound");
 function paint(){ if(!btn) return;
   btn.setAttribute("aria-pressed",String(on)); btn.setAttribute("aria-label",on?"Sound on":"Sound off"); btn.title=on?"Turn sound off":"Turn sound on";
