@@ -186,11 +186,11 @@ def folder_tiles_html(folders):
         mini = ''.join('<span class="dot4"></span>' if s.get('pill')
                        else f'<svg aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
                        for s in f['subs'][:4])
-        new = ' · NEW' if f['isNew'] else ''
+        new = '<span class="fbadge">NEW</span>' if f['isNew'] else ''
         out.append(f'<button class="folder" type="button" data-topic="{f["slug"]}" '
                    f'aria-label="{esc(f["name"])}. Open folder"><div class="ftile">{mini}</div>'
-                   f'<div class="fname">{esc(f["name"])}{new}</div>'
-                   f'<div class="fcount">{len(f["subs"])} inside</div></button>')
+                   f'{new}'
+                   f'<div class="fname">{esc(f["name"])}</div></button>')
     return '\n'.join(out)
 
 
