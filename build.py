@@ -129,7 +129,10 @@ def emoji_defs():
     # to the tile/chip/title size. A bare <image> in <defs> does NOT scale:
     # <use> draws it at its native 128px and clips it to the small viewport,
     # which is what made the first shipped version show fragments.
-    parts = ['<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>']
+    # The defs ship as shared/emoji-defs.svg and load lazily (folders.js
+    # fetches them when idle); they are NOT inlined into the homepage, so
+    # the page itself stays small.
+    parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>']
     for key in sorted(EMOJI):
         parts.append(f'<symbol id="em-{key}" viewBox="0 0 128 128"><image href="{EMOJI[key]}" width="128" height="128"/></symbol>')
     parts.append(RELATIVES_SYMBOL)
@@ -200,7 +203,8 @@ def folder_tiles_html(folders):
 def home_page(modules):
     tiles = sorted((m for m in modules if m.get('tile')), key=lambda m: m['order'])
     folders = folder_data(modules)
-    main = open('home.html').read().replace('{{emojiDefs}}', emoji_defs()) \
+    open('shared/emoji-defs.svg', 'w').write(emoji_defs())
+    main = open('home.html').read() \
                                   .replace('{{folders}}', folder_tiles_html(folders)) \
                                   .replace('{{folderData}}', json.dumps(folders, ensure_ascii=False)) \
                                   .replace('{{updated}}', nice_date(site['home_updated']))
@@ -218,7 +222,12 @@ def home_page(modules):
 def write_service_worker(live):
     """Precache the shared files, root assets, emoji and live pages; name the cache after their content."""
     files = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png']
-    files += sorted(glob.glob('shared/**/*.*', recursive=True))
+    # Dead weight stays out of the precache: emoji.json is a build-time input
+    # only (the browser never fetches it), and folder-icons.svg is unused
+    # since the Fluent emoji switch. Both stay in the repo; neither is
+    # downloaded by visitors.
+    files += [f for f in sorted(glob.glob('shared/**/*.*', recursive=True))
+              if f not in ('shared/emoji.json', 'shared/folder-icons.svg')]
     files += [f"{m['path']}/" for m in live]
     digest = hashlib.sha1()
     for f in files:
