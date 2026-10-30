@@ -9,11 +9,9 @@
   var grid = document.getElementById("sheetGrid");
   var title = document.getElementById("sheetTitle");
   var count = document.getElementById("sheetCount");
-  var closeBtn = document.getElementById("sheetClose");
   var back = document.getElementById("sheetBack");
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) sheet.classList.add("reduce");
-  var lastFocus = null;
 
   function icon(id) { return '<svg aria-hidden="true"><use href="#' + id + '"/></svg>'; }
   function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -33,8 +31,7 @@
           (s.soon ? '<span class="soon-tag">Soon</span>' : "") + "</span>";
       grid.appendChild(a);
     });
-    lastFocus = tileEl;
-    if (reduce) { sheet.classList.add("open"); closeBtn.focus(); return; }
+    if (reduce) { sheet.classList.add("open"); return; }
     /* Grow from the tapped folder: measure the popup at its final spot,
        then animate transform from the tile's rect to the final rect. */
     box.style.transition = "none";
@@ -56,13 +53,12 @@
       box.removeEventListener("transitionend", h);
       box.style.transform = "";
     });
-    closeBtn.focus();
   }
 
   function closeFolder() {
     box.style.transform = "";
     sheet.classList.remove("open");
-    if (lastFocus) lastFocus.focus();
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   }
 
   document.querySelectorAll(".folder").forEach(function (tile) {
@@ -73,7 +69,6 @@
       if (topic) openFolder(topic, tile);
     });
   });
-  closeBtn.addEventListener("click", closeFolder);
   back.addEventListener("click", closeFolder);
   document.addEventListener("keydown", function (ev) {
     if (ev.key === "Escape" && sheet.classList.contains("open")) closeFolder();
