@@ -1,25 +1,8 @@
-/* Home page only: tile taps, "still being built" toast, intro hand-drawn marks. Shared behaviour is in page.js. */
+/* Home page only: intro hand-drawn marks. Shared behaviour is in page.js. */
 (function () {
   var S = window.SofA;
   if (!S) return;
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var toast = document.querySelector("#topic-toast"), toastTimer;
-
-  document.querySelectorAll(".topic").forEach(function (tile) {
-    tile.addEventListener("click", function () {
-      S.w("select", { theme: "press", emphasis: "subtle" });
-      if (!tile.dataset.toast) return;
-      clearTimeout(toastTimer);
-      toast.textContent = tile.dataset.toast;
-      toast.classList.add("is-visible");
-      toastTimer = setTimeout(function () { toast.classList.remove("is-visible"); }, 4200);
-    });
-  });
-
-  var seen = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { e.target.classList.toggle("visible", e.isIntersecting); });
-  }, { threshold: .05 });
-  document.querySelectorAll(".topic").forEach(function (tile) { seen.observe(tile); });
 
   document.fonts.ready.then(function () {
     var manual = document.querySelector("#manual");

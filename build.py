@@ -87,57 +87,35 @@ def module_page(m, modules):
     return page(head(m['title'], m['description'], m['url'], m['image'], ld), main, scripts)
 
 
-def tile_html(m):
-    t = m['tile']
-    live = m.get('live')
-    if t.get('scene'):
-        scene = open(os.path.join(m['dir'], t['scene'])).read().strip()
-    else:
-        scene = ''.join(f'<span class="actor" style="--delay:{i * 2 - 10}s"><img src="/shared/emoji/{code}.svg" alt="" aria-hidden="true"></span>'
-                        for i, code in enumerate(t['emoji']))
-    scene = f'<div class="scene" aria-hidden="true">{scene}<span class="spark">✧</span></div>'
-    stamp = '' if live else '<span class="stamp">Under construction</span>'
-    bottom = f'<div class="topic-bottom">{stamp}<span class="tile-arrow" aria-hidden="true">↗</span></div>'
-    badge = f'<span class="new-badge">{t["badge"]}</span>' if t.get('badge') else ''
-    classes = 'topic' + (' topic-community' if m['slug'] == 'community' else '') + ('' if live else ' topic-locked')
-    attrs = f'class="{classes}" data-motion="{t["motion"]}" style="--tile:{t["color"]}"'
-    inner = f'<h3>{esc(m["name"])}</h3><p class="desc">{esc(t["description"])}</p>{scene}{bottom}{badge}'
-    if live:
-        return f'<a {attrs} href="/{m["path"]}/" aria-label="{esc(m["name"])}. Open topic" data-cuelume-navigate>{inner}</a>'
-    return f'<button {attrs} data-toast="{esc(t["toast"])}" aria-label="{esc(m["name"])}. Under construction">{inner}</button>'
-
-
-TOPIC_ICONS = {'Community': 'em-parents', 'Health': 'em-basics', 'Wealth': 'em-generating-wealth',
-               'Career': 'em-choosing-career', 'Home': 'em-kitchen', 'People': 'em-self', 'Pets': 'em-cats',
-               'Travel': 'em-places', 'Fashion': 'em-men', 'Life Skills': 'em-driving',
-               'Life Events': 'em-buying-home', 'Tech': 'em-mobile', 'Legal': 'em-basic',
-               'Content': 'em-news', 'About': 'em-credits'}
-# Homepage icons are Fluent 3D emoji (shared/emoji.json, keyed by subtopic slug),
-# inlined once into the homepage as <defs>; tiles and popup chips reference them
-# with <use>. Relatives has no Fluent emoji, so it is a hand-drawn symbol.
-EMOJI = json.load(open('shared/emoji.json'))
-EMOJI_IDS = {'em-' + k for k in EMOJI} | {'em-relatives'}
-RELATIVES_SYMBOL = '<symbol id="em-relatives" viewBox="0 0 96 96"><path d="M20 80 Q20 58 38 58 Q56 58 56 80 Z" fill="#F7F3E8" stroke="#1F1C18" stroke-width="2.5" stroke-linejoin="round"/><circle cx="38" cy="36" r="14" fill="#F7F3E8" stroke="#1F1C18" stroke-width="2.5"/><path d="M42 84 Q42 62 60 62 Q78 62 78 84 Z" fill="#FDEBD7" stroke="#1F1C18" stroke-width="2.5" stroke-linejoin="round"/><circle cx="60" cy="42" r="14" fill="#FDEBD7" stroke="#1F1C18" stroke-width="2.5"/></symbol>'
-
-
-def slugify(name):
-    return re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
-
-
-def emoji_defs():
-    # Each emoji is wrapped in a <symbol> with a viewBox, so <use> scales it
-    # to the tile/chip/title size. A bare <image> in <defs> does NOT scale:
-    # <use> draws it at its native 128px and clips it to the small viewport,
-    # which is what made the first shipped version show fragments.
-    # The defs ship as shared/emoji-defs.svg and load lazily (folders.js
-    # fetches them when idle); they are NOT inlined into the homepage, so
-    # the page itself stays small.
-    parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>']
-    for key in sorted(EMOJI):
-        parts.append(f'<symbol id="em-{key}" viewBox="0 0 128 128"><image href="{EMOJI[key]}" width="128" height="128"/></symbol>')
-    parts.append(RELATIVES_SYMBOL)
-    parts.append('</defs></svg>')
-    return ''.join(parts)
+# Homepage icons are the device's own system emoji — no icon files are
+# loaded for them, so tiles and popups cost nothing to download and look
+# native on every phone. One character per subtopic, plus one per topic
+# for popup titles (Community has pills, so it uses the group character).
+SYSTEM_EMOJI = {'Basics': '🩺', 'Food, Water & Air': '🍲', 'Exercise': '👟',
+                'Body': '🫀', 'Check Up': '🏥', 'Mental Health': '🧠', 'Periods': '🩸',
+                'Generating Wealth': '💰', 'Investing': '📈', 'Insurance & Tax': '🛡️',
+                'Spending & Tracking': '🛒', 'Credit Cards & Loans': '💳',
+                'Choosing Career': '🧭', 'Job Search': '🔍', 'Career Ladder': '🪜',
+                'Resigning': '🚪', 'Kitchen': '🍳', 'Bedroom': '🛏️',
+                'Living Room': '🛋️', 'Bathroom': '🛁', 'Garden': '🪴',
+                'Self': '👤', 'Parents': '👥', 'Partner': '💕', 'Kids': '🧸',
+                'Friends': '🤝', 'Relatives': '👪', 'Colleagues': '💼',
+                'Roommate': '🔑', 'Enemies': '😡', 'Cats': '🐱', 'Dogs': '🐶',
+                'Places': '🗺️', 'Stay': '🏠', 'Flight': '✈️',
+                'Train': '🚆', 'Bus': '🚌', 'Cab': '🚕', 'Itinerary': '🗓️',
+                'Things to Carry': '🧳', 'Holidays': '🎁', 'Men': '👔', 'Women': '👗',
+                'Driving': '🚗', 'Swimming': '🌊', 'Hobbies': '🎨',
+                'Problem Solving': '🧩', 'Reminders': '⏰️',
+                'Buying Home': '🏡', 'Marriage': '💍', 'Pregnancy': '🍼',
+                'Buying a Car': '🚘', 'Moving to A New City': '🚚',
+                'Mobile': '📱', 'TV': '📺', 'Earphones': '🎧', 'Power Bank': '🔋',
+                'Basic': '⚖️', 'News': '📰', 'Movies & Shows': '🎬',
+                'Songs': '🎵', 'Books': '📚', 'Credits': '📜'}
+TOPIC_EMOJI = {'Community': '👥', 'Health': '🩺', 'Wealth': '💰',
+               'Career': '🧭', 'Home': '🍳', 'People': '👤', 'Pets': '🐱',
+               'Travel': '🗺️', 'Fashion': '👔', 'Life Skills': '🚗',
+               'Life Events': '🏡', 'Tech': '📱', 'Legal': '⚖️',
+               'Content': '📰', 'About': '📜'}
 def community_invites(topic):
     """WhatsApp invite links for the Community folder, in module-item order.
 
@@ -172,8 +150,7 @@ def folder_data(modules):
             subs = []
             for name in t.get('items') or []:
                 leaf = leaves.get((t['slug'], name))
-                ekey = 'em-' + slugify(name)
-                icon = ekey if ekey in EMOJI_IDS else TOPIC_ICONS[t['name']]
+                icon = SYSTEM_EMOJI.get(name, TOPIC_EMOJI[t['name']])
                 if leaf is None:
                     print(f"WARNING: no leaf module for {t['slug']} / {name}; linking to topic page as Soon")
                     subs.append({'name': name, 'href': f"/{t['path']}/", 'soon': True, 'icon': icon})
@@ -182,7 +159,7 @@ def folder_data(modules):
                 else:
                     subs.append({'name': name, 'href': f"/{t['path']}/", 'soon': True, 'icon': icon})
         folders.append({'name': t['name'], 'slug': t['slug'], 'href': f"/{t['path']}/",
-                        'icon': TOPIC_ICONS[t['name']], 'isNew': bool(t['tile'].get('badge')), 'subs': subs})
+                        'icon': TOPIC_EMOJI[t['name']], 'isNew': bool(t['tile'].get('badge')), 'subs': subs})
     return folders
 
 
@@ -190,7 +167,7 @@ def folder_tiles_html(folders):
     out = []
     for f in folders:
         mini = ''.join('<span class="dot4"></span>' if s.get('pill')
-                       else f'<img src="/shared/emoji-color/{s["icon"][3:]}.svg" alt="" aria-hidden="true">'
+                       else f'<span class="mini" aria-hidden="true">{esc(s["icon"])}</span>'
                        for s in f['subs'][:4])
         new = '<span class="fbadge">NEW</span>' if f['isNew'] else ''
         out.append(f'<button class="folder" type="button" data-topic="{f["slug"]}" '
@@ -203,7 +180,6 @@ def folder_tiles_html(folders):
 def home_page(modules):
     tiles = sorted((m for m in modules if m.get('tile')), key=lambda m: m['order'])
     folders = folder_data(modules)
-    open('shared/emoji-defs.svg', 'w').write(emoji_defs())
     main = open('home.html').read() \
                                   .replace('{{folders}}', folder_tiles_html(folders)) \
                                   .replace('{{folderData}}', json.dumps(folders, ensure_ascii=False)) \
@@ -222,12 +198,14 @@ def home_page(modules):
 def write_service_worker(live):
     """Precache the shared files, root assets, emoji and live pages; name the cache after their content."""
     files = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png']
-    # Dead weight stays out of the precache: emoji.json is a build-time input
-    # only (the browser never fetches it), and folder-icons.svg is unused
-    # since the Fluent emoji switch. Both stay in the repo; neither is
+    # Dead weight stays out of the precache: emoji.json and emoji-defs.svg
+    # are build-time inputs only, folder-icons.svg is unused since the
+    # Fluent emoji switch, and the emoji-color tiles are replaced by system
+    # emoji. The files stay in the repo until deleted; none of them is
     # downloaded by visitors.
     files += [f for f in sorted(glob.glob('shared/**/*.*', recursive=True))
-              if f not in ('shared/emoji.json', 'shared/folder-icons.svg')]
+              if f not in ('shared/emoji.json', 'shared/folder-icons.svg', 'shared/emoji-defs.svg')
+              and not f.startswith('shared/emoji-color/')]
     files += [f"{m['path']}/" for m in live]
     digest = hashlib.sha1()
     for f in files:

@@ -13,30 +13,12 @@
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) sheet.classList.add("reduce");
 
-  /* Popup emoji live in shared/emoji-defs.svg, fetched lazily so the page
-     itself stays small. <use> references resolve live once the defs arrive,
-     so a popup opened early simply fills its icons in a moment later. */
-  var defsState = 0; /* 0 = not fetched, 1 = fetching, 2 = loaded */
-  function ensureDefs() {
-    if (defsState !== 0) return;
-    defsState = 1;
-    fetch("/shared/emoji-defs.svg").then(function (r) { return r.text(); }).then(function (svg) {
-      var div = document.createElement("div");
-      div.innerHTML = svg;
-      if (div.firstChild) document.body.insertBefore(div.firstChild, document.body.firstChild);
-      defsState = 2;
-    }).catch(function () { defsState = 0; });
-  }
-  if ("requestIdleCallback" in window) { requestIdleCallback(ensureDefs, { timeout: 3000 }); }
-  else { setTimeout(ensureDefs, 1000); }
-
-  function icon(id) { return '<svg aria-hidden="true"><use href="#' + id + '"/></svg>'; }
+  function icon(ch) { return '<span class="emoji" aria-hidden="true">' + esc(ch) + '</span>'; }
   function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
   function openFolder(topic, tileEl) {
-    ensureDefs();
     title.innerHTML = icon(topic.icon) + '<a href="' + topic.href + '">' + esc(topic.name) + "</a>";
-    count.textContent = topic.subs.length + " subtopics";
+    count.textContent = topic.subs.length === 1 ? "1 subtopic" : topic.subs.length + " subtopics";
     grid.innerHTML = "";
     topic.subs.forEach(function (s, i) {
       var a = document.createElement("a");

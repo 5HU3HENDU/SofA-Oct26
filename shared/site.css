@@ -138,12 +138,8 @@
 /* Launch changes: keep the original scenes and motion. */
 .brand-mark{display:block;width:46px;height:46px}.footer-star .brand-mark{width:32px;height:32px}
 .school-pillars{display:flex;justify-content:flex-start;align-items:center;gap:.5em;flex-wrap:nowrap;white-space:nowrap;width:100%;font-family:Kalam,'Comic Sans MS',cursive;font-size:clamp(20px,6.4vw,34px);line-height:1.5;margin:26px 0 0;padding:4px 6px;color:var(--ink)}.school-pillars .pw{position:relative;display:inline-block;padding:0 .12em}.school-pillars .sep{color:var(--red);font-size:1.3em;line-height:1}.school-pillars .ch{display:inline-block;opacity:0;transform:translateY(.12em) rotate(-3deg);transition:opacity .12s ease-out,transform .22s ease-out}.school-pillars .ch.on{opacity:1;transform:none}.school-pillars .sep{opacity:0;transition:opacity .2s}.school-pillars .sep.on{opacity:1}
-.topic-community{grid-column:span 2}.topic-community .tile-arrow{margin-left:auto}.topic-community h3{padding-right:50px}.topic-community .desc{max-width:none}
-.new-badge{position:absolute;top:15px;right:15px;font-size:10px;font-weight:700;letter-spacing:.7px;padding:4px 7px;background:#b9432b;color:#fff;border-radius:4px 2px 4px 3px;transform:rotate(5deg)}
 .topic-locked{filter:grayscale(1)}.topic-locked:hover{transform:none;box-shadow:2px 3px 0 #29282315}
-.topic-toast{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translate(-50%,12px);width:max-content;max-width:calc(100% - 32px);padding:15px 20px;border:1px solid #292823;border-radius:6px 10px 5px 8px;background:#292823;color:#faf7ef;font-size:14px;line-height:1.5;box-shadow:2px 4px 0 #29282320;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
-.topic-toast.is-visible{opacity:1;transform:translate(-50%,0)}
-@media(max-width:760px){.brand-mark{width:36px;height:36px}.topic-toast{font-size:14px;padding:14px 17px}}
+@media(max-width:760px){.brand-mark{width:36px;height:36px}}
 
 .credit{flex:1;margin:0;font-size:12px;line-height:1.5;color:inherit;opacity:.85}.credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}footer{flex-wrap:wrap}
 .topic-header .quiet{border:0;border-image:none;background:none;box-shadow:none;border-radius:0;padding:8px 0;color:var(--muted);font-weight:600;display:inline-flex;align-items:center;min-height:44px;text-decoration:none}.topic-header .quiet:hover,.topic-header .quiet:focus-visible{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
