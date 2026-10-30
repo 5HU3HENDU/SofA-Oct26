@@ -30,7 +30,8 @@ def load_modules():
     return modules
 
 
-def head(title, description, url, image, ld):
+def head(title, description, url, image, ld, extra_styles=()):
+    extra_links = ''.join('<link rel="stylesheet" href="' + s + '">' for s in extra_styles)
     return f'''<head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#faf7ef">
@@ -42,7 +43,7 @@ def head(title, description, url, image, ld):
 <meta property="og:url" content="{url}"><meta property="og:image" content="{base + image}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{base + image}">
 <link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/shared/site.css"><link rel="stylesheet" href="/shared/annotations.css">
+<link rel="stylesheet" href="/shared/site.css"><link rel="stylesheet" href="/shared/annotations.css">{extra_links}
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>'''
 
@@ -106,9 +107,99 @@ def tile_html(m):
     return f'<button {attrs} data-toast="{esc(t["toast"])}" aria-label="{esc(m["name"])}. Under construction">{inner}</button>'
 
 
+TOPIC_ICONS = {'Community': 'o-chat', 'Health': 'o-bottle', 'Wealth': 'o-wallet', 'Career': 'o-badge',
+               'Home': 'o-key', 'People': 'o-cups', 'Pets': 'o-paw', 'Travel': 'o-case', 'Fashion': 'o-tee',
+               'Life Skills': 'o-toolbox', 'Life Events': 'o-gift', 'Tech': 'o-chip', 'Legal': 'o-doc',
+               'Content': 'o-book'}
+FOLDER_ICONS = {'Generating Wealth': 'o-chart', 'Investing': 'o-coin', 'Insurance & Tax': 'o-bill',
+                'Spending & Tracking': 'o-cal', 'Credit Cards & Loans': 'o-card',
+                'Choosing Career': 'o-compass', 'Job Search': 'o-mag', 'Career Ladder': 'o-ladder',
+                'Resigning': 'o-door', 'Basic': 'o-shield',
+                'Kitchen': 'o-pan', 'Bedroom': 'o-bed', 'Living Room': 'o-sofa', 'Bathroom': 'o-bath',
+                'Garden': 'o-plant', 'Basics': 'o-apple', 'Food, Water & Air': 'o-mug',
+                'Exercise': 'o-dumb', 'Body': 'o-person', 'Check Up': 'o-heart', 'Mental Health': 'o-bulb',
+                'Periods': 'o-drop', 'Cats': 'o-cat', 'Dogs': 'o-dog',
+                'Self': 'o-star', 'Parents': 'o-heart', 'Partner': 'o-ring', 'Kids': 'o-ball',
+                'Friends': 'o-users', 'Relatives': 'o-house', 'Colleagues': 'o-mug',
+                'Roommate': 'o-person', 'Enemies': 'o-no',
+                'Places': 'o-compass', 'Stay': 'o-house', 'Flight': 'o-flight', 'Train': 'o-train',
+                'Bus': 'o-truck', 'Cab': 'o-car', 'Itinerary': 'o-doc', 'Things to Carry': 'o-case',
+                'Holidays': 'o-star', 'Men': 'o-tie', 'Women': 'o-dress',
+                'Driving': 'o-wheel', 'Swimming': 'o-waves', 'Hobbies': 'o-star',
+                'Problem Solving': 'o-bulb', 'Reminders': 'o-cal',
+                'Buying Home': 'o-house', 'Marriage': 'o-ring', 'Pregnancy': 'o-heart',
+                'Buying a Car': 'o-car', 'Moving to A New City': 'o-truck',
+                'Mobile': 'o-phone', 'TV': 'o-tv', 'Earphones': 'o-ears', 'Power Bank': 'o-batt',
+                'News': 'o-news', 'Movies & Shows': 'o-tv', 'Songs': 'o-note', 'Books': 'o-bookmark'}
+
+
+def community_invites(topic):
+    """WhatsApp invite links for the Community folder, in module-item order.
+
+    The links live only in community/content.html, so they are read from there —
+    never guessed. A count mismatch fails the build rather than shipping a
+    wrong invite on a group."""
+    content = open(os.path.join(topic['dir'], 'content.html')).read()
+    hrefs = [html.unescape(h) for h in re.findall(r'<a class="subtopic" href="([^"]+)"', content)]
+    items = topic.get('items') or []
+    if len(hrefs) != len(items):
+        raise ValueError(f"community invites ({len(hrefs)}) != items ({len(items)}); refusing to guess")
+    return [{'name': n, 'href': h, 'pill': True, 'blank': True} for n, h in zip(items, hrefs)]
+
+
+def folder_data(modules):
+    """One folder per live topic: subtopics in module-item order.
+
+    Live leaf modules link to their page; not-live leaves (Health's Body and
+    Food, Water & Air; Wealth's Insurance & Tax, Spending & Tracking,
+    Credit Cards & Loans) have no page, so they link to the topic page and
+    carry soon=True for the "Soon" tag."""
+    leaves = {}
+    for m in modules:
+        if m.get('parent'):
+            leaves[(m['parent'], m['name'])] = m
+    tiles = sorted((m for m in modules if m.get('tile') and m.get('live')), key=lambda m: m['order'])
+    folders = []
+    for t in tiles:
+        if t['slug'] == 'community':
+            subs = community_invites(t)
+        else:
+            subs = []
+            for name in t.get('items') or []:
+                leaf = leaves.get((t['slug'], name))
+                icon = FOLDER_ICONS.get(name, TOPIC_ICONS[t['name']])
+                if leaf is None:
+                    print(f"WARNING: no leaf module for {t['slug']} / {name}; linking to topic page as Soon")
+                    subs.append({'name': name, 'href': f"/{t['path']}/", 'soon': True, 'icon': icon})
+                elif leaf.get('live'):
+                    subs.append({'name': name, 'href': f"/{leaf['path']}/", 'icon': icon})
+                else:
+                    subs.append({'name': name, 'href': f"/{t['path']}/", 'soon': True, 'icon': icon})
+        folders.append({'name': t['name'], 'slug': t['slug'], 'href': f"/{t['path']}/",
+                        'icon': TOPIC_ICONS[t['name']], 'isNew': bool(t['tile'].get('badge')), 'subs': subs})
+    return folders
+
+
+def folder_tiles_html(folders):
+    out = []
+    for f in folders:
+        mini = ''.join('<span class="dot4"></span>' if s.get('pill')
+                       else f'<svg aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
+                       for s in f['subs'][:4])
+        new = ' · NEW' if f['isNew'] else ''
+        out.append(f'<button class="folder" type="button" data-topic="{f["slug"]}" '
+                   f'aria-label="{esc(f["name"])}. Open folder"><div class="ftile">{mini}</div>'
+                   f'<div class="fname">{esc(f["name"])}{new}</div>'
+                   f'<div class="fcount">{len(f["subs"])} inside</div></button>')
+    return '\n'.join(out)
+
+
 def home_page(modules):
     tiles = sorted((m for m in modules if m.get('tile')), key=lambda m: m['order'])
-    main = open('home.html').read().replace('{{tiles}}', '\n'.join(tile_html(m) for m in tiles)) \
+    folders = folder_data(modules)
+    main = open('home.html').read().replace('{{icons}}', open('shared/folder-icons.svg').read().strip()) \
+                                  .replace('{{folders}}', folder_tiles_html(folders)) \
+                                  .replace('{{folderData}}', json.dumps(folders, ensure_ascii=False)) \
                                   .replace('{{updated}}', nice_date(site['home_updated']))
     live = [m for m in tiles if m.get('live')]
     ld = {"@context": "https://schema.org", "@graph": [
@@ -117,8 +208,8 @@ def home_page(modules):
          "dateModified": site['home_updated'], "isPartOf": {"@id": base + "/#site"},
          "mainEntity": {"@type": "ItemList", "itemListElement": [
              {"@type": "ListItem", "position": i + 1, "name": m['name'], "url": m['url']} for i, m in enumerate(live)]}}]}
-    scripts = '<script src="/shared/lib.js"></script><script src="/shared/page.js"></script><script src="/shared/tracker.js"></script><script src="/shared/home.js"></script>'
-    return page(head(site['title'], site['description'], base + '/', site['image'], ld), main, scripts)
+    scripts = '<script src="/shared/lib.js"></script><script src="/shared/page.js"></script><script src="/shared/tracker.js"></script><script src="/shared/home.js"></script><script src="/shared/folders.js"></script>'
+    return page(head(site['title'], site['description'], base + '/', site['image'], ld, extra_styles=['/shared/folders.css']), main, scripts)
 
 
 def write_service_worker(live):
