@@ -27,7 +27,7 @@
       a.href = s.href;
       if (s.blank) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
       a.innerHTML = s.pill ? '<span class="pill">' + esc(s.name) + "</span>"
-        : '<span class="chipicon">' + icon(s.icon) + "</span><span>" + esc(s.name) +
+        : icon(s.icon) + "<span>" + esc(s.name) +
           (s.soon ? '<span class="soon-tag">Soon</span>' : "") + "</span>";
       grid.appendChild(a);
     });

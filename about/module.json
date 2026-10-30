@@ -1,0 +1,25 @@
+{
+  "name": "About",
+  "slug": "about",
+  "type": "tile",
+  "live": true,
+  "parent": null,
+  "title": "About - School of Adults",
+  "description": "What this school is, and who makes it.",
+  "updated": "2026-10-30",
+  "image": "/shared/og-default.png",
+  "changefreq": "monthly",
+  "items": [
+    "Credits"
+  ],
+  "order": 15,
+  "tile": {
+    "emoji": [
+      "2139"
+    ],
+    "color": "#ebe8e0",
+    "motion": "sway",
+    "toast": "About this school.",
+    "description": "What this school is, and who makes it."
+  }
+}

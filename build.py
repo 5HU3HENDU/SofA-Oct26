@@ -107,32 +107,30 @@ def tile_html(m):
     return f'<button {attrs} data-toast="{esc(t["toast"])}" aria-label="{esc(m["name"])}. Under construction">{inner}</button>'
 
 
-TOPIC_ICONS = {'Community': 'o-chat', 'Health': 'o-bottle', 'Wealth': 'o-wallet', 'Career': 'o-badge',
-               'Home': 'o-key', 'People': 'o-cups', 'Pets': 'o-paw', 'Travel': 'o-case', 'Fashion': 'o-tee',
-               'Life Skills': 'o-toolbox', 'Life Events': 'o-gift', 'Tech': 'o-chip', 'Legal': 'o-doc',
-               'Content': 'o-book'}
-FOLDER_ICONS = {'Generating Wealth': 'o-chart', 'Investing': 'o-coin', 'Insurance & Tax': 'o-bill',
-                'Spending & Tracking': 'o-cal', 'Credit Cards & Loans': 'o-card',
-                'Choosing Career': 'o-compass', 'Job Search': 'o-mag', 'Career Ladder': 'o-ladder',
-                'Resigning': 'o-door', 'Basic': 'o-shield',
-                'Kitchen': 'o-pan', 'Bedroom': 'o-bed', 'Living Room': 'o-sofa', 'Bathroom': 'o-bath',
-                'Garden': 'o-plant', 'Basics': 'o-apple', 'Food, Water & Air': 'o-mug',
-                'Exercise': 'o-dumb', 'Body': 'o-person', 'Check Up': 'o-heart', 'Mental Health': 'o-bulb',
-                'Periods': 'o-drop', 'Cats': 'o-cat', 'Dogs': 'o-dog',
-                'Self': 'o-star', 'Parents': 'o-heart', 'Partner': 'o-ring', 'Kids': 'o-ball',
-                'Friends': 'o-users', 'Relatives': 'o-house', 'Colleagues': 'o-mug',
-                'Roommate': 'o-person', 'Enemies': 'o-no',
-                'Places': 'o-compass', 'Stay': 'o-house', 'Flight': 'o-flight', 'Train': 'o-train',
-                'Bus': 'o-truck', 'Cab': 'o-car', 'Itinerary': 'o-doc', 'Things to Carry': 'o-case',
-                'Holidays': 'o-star', 'Men': 'o-tie', 'Women': 'o-dress',
-                'Driving': 'o-wheel', 'Swimming': 'o-waves', 'Hobbies': 'o-star',
-                'Problem Solving': 'o-bulb', 'Reminders': 'o-cal',
-                'Buying Home': 'o-house', 'Marriage': 'o-ring', 'Pregnancy': 'o-heart',
-                'Buying a Car': 'o-car', 'Moving to A New City': 'o-truck',
-                'Mobile': 'o-phone', 'TV': 'o-tv', 'Earphones': 'o-ears', 'Power Bank': 'o-batt',
-                'News': 'o-news', 'Movies & Shows': 'o-tv', 'Songs': 'o-note', 'Books': 'o-bookmark'}
+TOPIC_ICONS = {'Community': 'em-parents', 'Health': 'em-basics', 'Wealth': 'em-generating-wealth',
+               'Career': 'em-choosing-career', 'Home': 'em-kitchen', 'People': 'em-self', 'Pets': 'em-cats',
+               'Travel': 'em-places', 'Fashion': 'em-men', 'Life Skills': 'em-driving',
+               'Life Events': 'em-buying-home', 'Tech': 'em-mobile', 'Legal': 'em-basic',
+               'Content': 'em-news', 'About': 'em-credits'}
+# Homepage icons are Fluent 3D emoji (shared/emoji.json, keyed by subtopic slug),
+# inlined once into the homepage as <defs>; tiles and popup chips reference them
+# with <use>. Relatives has no Fluent emoji, so it is a hand-drawn symbol.
+EMOJI = json.load(open('shared/emoji.json'))
+EMOJI_IDS = {'em-' + k for k in EMOJI} | {'em-relatives'}
+RELATIVES_SYMBOL = '<symbol id="em-relatives" viewBox="0 0 96 96"><path d="M20 80 Q20 58 38 58 Q56 58 56 80 Z" fill="#F7F3E8" stroke="#1F1C18" stroke-width="2.5" stroke-linejoin="round"/><circle cx="38" cy="36" r="14" fill="#F7F3E8" stroke="#1F1C18" stroke-width="2.5"/><path d="M42 84 Q42 62 60 62 Q78 62 78 84 Z" fill="#FDEBD7" stroke="#1F1C18" stroke-width="2.5" stroke-linejoin="round"/><circle cx="60" cy="42" r="14" fill="#FDEBD7" stroke="#1F1C18" stroke-width="2.5"/></symbol>'
 
 
+def slugify(name):
+    return re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+
+
+def emoji_defs():
+    parts = ['<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>']
+    for key in sorted(EMOJI):
+        parts.append(f'<image id="em-{key}" href="{EMOJI[key]}" width="128" height="128"/>')
+    parts.append(RELATIVES_SYMBOL)
+    parts.append('</defs></svg>')
+    return ''.join(parts)
 def community_invites(topic):
     """WhatsApp invite links for the Community folder, in module-item order.
 
@@ -167,7 +165,8 @@ def folder_data(modules):
             subs = []
             for name in t.get('items') or []:
                 leaf = leaves.get((t['slug'], name))
-                icon = FOLDER_ICONS.get(name, TOPIC_ICONS[t['name']])
+                ekey = 'em-' + slugify(name)
+                icon = ekey if ekey in EMOJI_IDS else TOPIC_ICONS[t['name']]
                 if leaf is None:
                     print(f"WARNING: no leaf module for {t['slug']} / {name}; linking to topic page as Soon")
                     subs.append({'name': name, 'href': f"/{t['path']}/", 'soon': True, 'icon': icon})
@@ -197,7 +196,7 @@ def folder_tiles_html(folders):
 def home_page(modules):
     tiles = sorted((m for m in modules if m.get('tile')), key=lambda m: m['order'])
     folders = folder_data(modules)
-    main = open('home.html').read().replace('{{icons}}', open('shared/folder-icons.svg').read().strip()) \
+    main = open('home.html').read().replace('{{emojiDefs}}', emoji_defs()) \
                                   .replace('{{folders}}', folder_tiles_html(folders)) \
                                   .replace('{{folderData}}', json.dumps(folders, ensure_ascii=False)) \
                                   .replace('{{updated}}', nice_date(site['home_updated']))

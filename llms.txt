@@ -5,6 +5,8 @@
 ## Pages
 
 - [Home](https://schoolofadults.com/): A little school for the things life forgot to teach us. Health, wealth, travel and the rest of being an adult.
+- [Credits](https://schoolofadults.com/about/credits/): Credits for the icons and work on this site.
+- [About](https://schoolofadults.com/about/): What this school is, and who makes it.
 - [Career Ladder](https://schoolofadults.com/career/career-ladder/): Choose the skill you need. Then choose where to learn it.
 - [Choosing Career](https://schoolofadults.com/career/choosing-career/): Look at possible paths before choosing a direction.
 - [Job Search](https://schoolofadults.com/career/job-search/): Find leads. Prepare real examples. Keep your next move grounded.

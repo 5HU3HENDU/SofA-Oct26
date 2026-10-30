@@ -23,8 +23,7 @@
 .appgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 8px; }
 .app { text-align: center; cursor: pointer; opacity: 0; transform: translateY(10px); animation: appIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent; }
 @keyframes appIn { to { opacity: 1; transform: translateY(0); } }
-.app .chipicon { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin: 0 auto; background: #fff; border-radius: 17px; box-shadow: 0 4px 12px rgba(31,28,24,0.12); }
-.app .chipicon svg { width: 40px; height: 40px; }
+.app > svg { display: block; width: 64px; height: 64px; margin: 0 auto; }
 .app span { display: block; font-size: 11px; font-weight: 600; line-height: 1.25; margin-top: 4px; }
 .app .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 5px 10px; border: 1.5px solid #1F1C18; border-radius: 999px; background: #fff; margin-top: 12px; }
 .app.soon { opacity: 0.55; }

@@ -1,0 +1,12 @@
+{
+  "name": "Credits",
+  "slug": "credits",
+  "type": "leaf",
+  "live": true,
+  "parent": "about",
+  "title": "Credits - About | School of Adults",
+  "description": "Credits for the icons and work on this site.",
+  "updated": "2026-10-30",
+  "image": "/shared/og-default.png",
+  "changefreq": "monthly"
+}
