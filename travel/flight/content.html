@@ -51,7 +51,7 @@
 #boarding .del-btn{background:transparent;color:var(--muted);font:700 0.8rem system-ui;cursor:pointer;min-height:44px;padding:8px 12px;text-decoration:underline}
 #boarding .strip-dots{display:flex;justify-content:center;gap:7px;padding:2px 0}
 #boarding .strip-dots[hidden]{display:none}
-#boarding .strip-dots i{width:8px;height:8px;border-radius:50%;background:#cfc9bb}
+#boarding .strip-dots i{width:8px;height:8px;border-radius:50%;background:#cfc9bb;cursor:pointer}
 #boarding .strip-dots i.on{background:var(--teal)}
 #boarding .empty-note{text-align:center;color:var(--muted);font-size:0.85rem;margin:0 0 10px}
 #boarding .below{max-width:420px;margin:16px auto 0}
@@ -194,6 +194,7 @@ if(draftVals){slides.push({key:'draft',trip:null,isDraft:true});out+=editTicket(
 list.innerHTML=out;
 $('emptyNote').hidden=!(trips.length===0&&!draftVals&&!editingKey);
 const box=$('stripDots'),n=slides.length;box.hidden=n<2;box.innerHTML=n<2?'':Array.from({length:n},(_,i)=>`<i${i===0?' class="on"':''}></i>`).join('');
+[...box.children].forEach((d,i)=>d.addEventListener('click',()=>{const k=list.children[i];if(k)k.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})}));
 visibleIndex=0;
 list.querySelectorAll('.del-btn').forEach(b=>b.addEventListener('click',()=>{const t=readTrips().find(x=>legKey(x)===b.dataset.key);if(!t)return;
 /* Two-tap delete, no native dialog: dialogs are unreliable in some
@@ -222,7 +223,7 @@ const cd=cdText(entry.trip),el=sec.querySelector('.cd');
 if(!el){renderBelowFor(entry);return}
 if(cd.state==='gone'||(cd.state==='open'&&el.tagName!=='A')){renderBelowFor(entry);return}
 if(cd.state==='soon')el.textContent=cd.text}
-$('tripList').addEventListener('scroll',()=>{const l=$('tripList'),kids=[...l.children];if(kids.length<2)return;const mid=l.scrollLeft+l.clientWidth/2;let best=0,bd=1e9;kids.forEach((k,i)=>{const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid);if(d<bd){bd=d;best=i}});[...$('stripDots').children].forEach((d,i)=>d.classList.toggle('on',i===best));if(best!==visibleIndex){visibleIndex=best;renderBelowFor(slides[best]||null)}},{passive:true});
+$('tripList').addEventListener('scroll',()=>{const l=$('tripList'),kids=[...l.children];if(kids.length<2)return;const mid=l.getBoundingClientRect().left+l.clientWidth/2;let best=0,bd=1e9;kids.forEach((k,i)=>{const r=k.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});[...$('stripDots').children].forEach((d,i)=>d.classList.toggle('on',i===best));if(best!==visibleIndex){visibleIndex=best;renderBelowFor(slides[best]||null)}},{passive:true});
 $('addFlightButton').addEventListener('click',()=>{if(editingKey||draftVals){scrollToEditor();return}draftVals=blankVals();showTrips();scrollToKey('draft')});
 function boot(){showTrips();setInterval(()=>{if(editingKey||draftVals)return;const a=pruneTrips(readTrips());if(a.length!==readTrips().length){saveTrips(a);showTrips()}},60000);setInterval(tickBelow,30000)}
 boot();
