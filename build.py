@@ -125,9 +125,13 @@ def slugify(name):
 
 
 def emoji_defs():
+    # Each emoji is wrapped in a <symbol> with a viewBox, so <use> scales it
+    # to the tile/chip/title size. A bare <image> in <defs> does NOT scale:
+    # <use> draws it at its native 128px and clips it to the small viewport,
+    # which is what made the first shipped version show fragments.
     parts = ['<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>']
     for key in sorted(EMOJI):
-        parts.append(f'<image id="em-{key}" href="{EMOJI[key]}" width="128" height="128"/>')
+        parts.append(f'<symbol id="em-{key}" viewBox="0 0 128 128"><image href="{EMOJI[key]}" width="128" height="128"/></symbol>')
     parts.append(RELATIVES_SYMBOL)
     parts.append('</defs></svg>')
     return ''.join(parts)
@@ -183,7 +187,7 @@ def folder_tiles_html(folders):
     out = []
     for f in folders:
         mini = ''.join('<span class="dot4"></span>' if s.get('pill')
-                       else f'<svg aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
+                       else f'<img src="/shared/emoji-color/{s["icon"][3:]}.svg" alt="" aria-hidden="true">'
                        for s in f['subs'][:4])
         new = '<span class="fbadge">NEW</span>' if f['isNew'] else ''
         out.append(f'<button class="folder" type="button" data-topic="{f["slug"]}" '
