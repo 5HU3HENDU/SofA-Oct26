@@ -5,8 +5,8 @@
   "live": true,
   "parent": "travel",
   "title": "Flight - Travel | School of Adults",
-  "description": "Flight: save your booking PNR or flight number, see your flight ticket, and open live flight status.",
-  "updated": "2026-10-23",
+  "description": "Flight: add your flight by hand, see your ticket, and open live flight status, check-in and manage booking.",
+  "updated": "2026-10-31",
   "image": "/shared/og-default.png",
   "changefreq": "monthly",
   "needs_script": true
