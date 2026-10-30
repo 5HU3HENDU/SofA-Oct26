@@ -162,7 +162,11 @@ if(trips.length!==readTrips().length)saveTrips(trips);
 const list=$('tripList'),sample=trips.length===0;
 $('sampleNote').hidden=!sample;
 list.innerHTML=sample?ticket(getSample()):trips.map(ticket).join('');
-list.querySelectorAll('.del-btn').forEach(b=>b.addEventListener('click',()=>{const t=readTrips().find(x=>legKey(x)===b.dataset.key);if(!t)return;if(!confirm(`Delete ${t.al} ${t.no} from this device?`))return;saveTrips(readTrips().filter(x=>legKey(x)!==b.dataset.key));showTrips()}));
+list.querySelectorAll('.del-btn').forEach(b=>b.addEventListener('click',()=>{const t=readTrips().find(x=>legKey(x)===b.dataset.key);if(!t)return;
+/* Two-tap delete, no native dialog: dialogs are unreliable in some
+   browsers and block the page. First tap arms, second tap deletes. */
+if(b.dataset.armed!=='1'){b.dataset.armed='1';b.textContent='Tap again to delete';setTimeout(()=>{if(b.isConnected){b.dataset.armed='';b.textContent='Delete this flight'}},4000);return}
+saveTrips(readTrips().filter(x=>legKey(x)!==b.dataset.key));showTrips()}));
 const box=$('stripDots'),n=list.children.length;box.hidden=n<2;box.innerHTML=n<2?'':Array.from({length:n},(_,i)=>`<i${i===0?' class="on"':''}></i>`).join('');
 renderBelow()}
 $('tripList').addEventListener('scroll',()=>{const l=$('tripList'),kids=[...l.children];if(kids.length<2)return;const mid=l.scrollLeft+l.clientWidth/2;let best=0,bd=1e9;kids.forEach((k,i)=>{const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid);if(d<bd){bd=d;best=i}});[...$('stripDots').children].forEach((d,i)=>d.classList.toggle('on',i===best))},{passive:true});
